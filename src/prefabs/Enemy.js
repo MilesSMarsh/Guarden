@@ -1,3 +1,4 @@
+//test test test
 class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, Xvelocity, Yvelocity, texture) {
         //super(scene, 700, Phaser.Math.Between(75, 305), texture);
@@ -15,7 +16,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         if(this.newEnemy && this.x < 0) {
-            this.parentScene.addEnemey(this.parent, this.Xvelocity, this.Yvelocity);
+            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
             this.newEnemy = false;
         }
 
