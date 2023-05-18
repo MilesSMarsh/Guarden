@@ -7,6 +7,7 @@ class Weapon{
         this.hitBoxWidth = HitBox.width;
         this.hitBoxHeight = HitBox.height;
 
+        
         scene.physics.add.existing(this.hitBox).setOrigin(0.5);
         this.hitBox.body.onOverlap = true;
 
