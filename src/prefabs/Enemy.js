@@ -16,7 +16,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         if(this.newEnemy && this.x < 0) {
-            this.parentScene.addEnemey(this.parent, this.Xvelocity, this.Yvelocity);
+            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
             this.newEnemy = false;
         }
 
