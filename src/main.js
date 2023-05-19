@@ -1,4 +1,3 @@
-//test text for testing pull request - another test
 let config = {
     type: Phaser.AUTO,
     width: 700,
@@ -22,3 +21,8 @@ let keyUP = null;
 let keyDOWN = null;
 let keySPACE = null;
 let keyENTER = null;
+let keyW = null;
+let keyA = null;
+let keyS = null;
+let keyD = null;
+let keyE = null;

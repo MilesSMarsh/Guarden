@@ -57,27 +57,33 @@ class Load extends Phaser.Scene {
         });
         this.anims.create({
             key: 'attack-right',
-            frameRate: 64,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('temp_attack', {start: 0, end:0})
         });
         this.anims.create({
             key: 'attack-left',
-            frameRate: 64,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('temp_attack', {start: 1, end:1})
         });
         this.anims.create({
             key: 'attack-up',
-            frameRate: 64,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('temp_attack', {start: 2, end:2})
         });
         this.anims.create({
             key: 'attack-down',
-            frameRate: 64,
+            frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('temp_attack', {start: 3, end:3})
+        });
+        this.anims.create({
+            key: 'interact',
+            frameRate: 16,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('temp_attack', {start: 0, end:3})
         });
 
 

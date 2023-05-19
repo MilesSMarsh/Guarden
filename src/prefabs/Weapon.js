@@ -10,6 +10,7 @@ class Weapon{
         
         scene.physics.add.existing(this.hitBox).setOrigin(0.5);
         this.hitBox.body.onOverlap = true;
+        this.hitBox.setActive(false);
 
     }
 

@@ -6,14 +6,20 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         scene.physics.add.existing(this).setOrigin(0.5);
 
         this.setScale(0.5);
-
         this.body.onOverlap = true;
-
         this.body.setCollideWorldBounds(true);
+
+        this.interactHitBox = scene.add.rectangle(this.x, this.y ,25, 25, 0xffffff, 0.1);
+        scene.physics.add.existing(this.interactHitBox);
+
         this.direction = direction;
         this.charVelocity = 100;
         this.collided = false;
         this.isAttaking = false;
+        this.interacting = false;
+        this.interactingWith = null;
+        this.attackingThis = null;
+
         this.currHealth = health;
         this.weapon = weapon;
         this.level = 1;
@@ -34,30 +40,53 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 this.weapon.hitBox.x = this.x;
                 this.weapon.hitBox.y = this.y - this.height;
                 this.weapon.changeHitBoxSize(this.weapon.hitBoxWidth, this.weapon.hitBoxHeight);
+
+                this.interactHitBox.x = this.x;
+                this.interactHitBox.y = this.y - this.height / 1.5;
                 break;
+
             case 'down':
                 this.weapon.hitBox.x = this.x;
                 this.weapon.hitBox.y = this.y + this.height;
                 this.weapon.changeHitBoxSize(this.weapon.hitBoxWidth, this.weapon.hitBoxHeight);
+
+                this.interactHitBox.x = this.x;
+                this.interactHitBox.y = this.y + this.height / 1.5;
                 break;
+
             case 'left':
                 this.weapon.hitBox.x = this.x - this.width;
                 this.weapon.hitBox.y = this.y;
                 this.weapon.changeHitBoxSize(this.weapon.hitBoxHeight, this.weapon.hitBoxWidth);
+
+                this.interactHitBox.x = this.x - this.width / 1.5;
+                this.interactHitBox.y = this.y;
                 break;
+                
             case 'right':
                 this.weapon.hitBox.x = this.x + this.width;
                 this.weapon.hitBox.y = this.y;
                 this.weapon.changeHitBoxSize(this.weapon.hitBoxHeight, this.weapon.hitBoxWidth);
+
+                this.interactHitBox.x = this.x + this.width / 1.5;
+                this.interactHitBox.y = this.y;
                 break;
         }
     }
 
-    handleAttackOverlap(obj){
+    handleAttackOverlap(){
         if(this.isAttacking){
-            console.log(`the object was hit`);
-            this.isAttaking = false;
-            //console.log(obj);
+            if(this.attackingThis != null){
+                console.log(this.attackingThis);
+            }
+        }
+    }
+
+    handleInteractOverlap(){
+        if(this.interacting){
+            if(this.interactingWith != null){
+                console.log(this.interactingWith);
+            }
         }
     }
     
@@ -67,6 +96,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
 class IdleState extends State{
     enter(scene, character){
 
+        character.weapon.hitBox.setActive(false);
         character.isAttacking = false;
         character.setVelocity(0);
         character.anims.play(`walk-${character.direction}`, true);
@@ -74,18 +104,22 @@ class IdleState extends State{
 
     }
     execute(scene, character){
-        const {left, right, up , down, space, shift} = scene.keys;
+        const {left, right, up , down, space, shift, keyE} = scene.keys;
 
         if(character.collided){
             this.stateMachine.transition('damaged');
             return;
         }
-        if(left.isDown || right.isDown || up.isDown || down.isDown ){
+        if(left.isDown || right.isDown || up.isDown || down.isDown || scene.keys.keyA.isDown || scene.keys.keyW.isDown || scene.keys.keyS.isDown || scene.keys.keyD.isDown){
             this.stateMachine.transition('move');
             return;
         }
         if(Phaser.Input.Keyboard.JustDown(space)){
             this.stateMachine.transition('attacking');
+            return;
+        }
+        if(Phaser.Input.Keyboard.JustDown(keyE)){
+            this.stateMachine.transition('interact');
             return;
         }
 
@@ -99,9 +133,14 @@ class MoveState extends State{
     //     character.isAttacking = false;
     // }
     execute(scene, character){
-        const { left, right, up, down, space, shift } = scene.keys;
+        const { left, right, up, down, space, shift, keyE} = scene.keys;
         if(character.collided){
             this.stateMachine.transition('damaged');
+            return;
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(keyE)){
+            this.stateMachine.transition('interact');
             return;
         }
 
@@ -112,26 +151,26 @@ class MoveState extends State{
         }
 
         // transition to idle if not pressing movement keys or attacking
-        if(!(left.isDown || right.isDown || up.isDown || down.isDown)) {
+        if(!(left.isDown || right.isDown || up.isDown || down.isDown || scene.keys.keyA.isDown || scene.keys.keyW.isDown || scene.keys.keyS.isDown || scene.keys.keyD.isDown)) {
             this.stateMachine.transition('idle');
             return;
         }
 
         // handle movement
         let moveDirection = new Phaser.Math.Vector2(0, 0);
-        if(up.isDown) {
+        if(up.isDown || scene.keys.keyW.isDown) {
             moveDirection.y = -1;
             character.direction = 'up';
             
-        } else if(down.isDown) {
+        } else if(down.isDown || scene.keys.keyS.isDown) {
             moveDirection.y = 1;
             character.direction = 'down';
         }
-        if(left.isDown) {
+        if(left.isDown || scene.keys.keyA.isDown) {
             moveDirection.x = -1;
             character.direction = 'left';
 
-        } else if(right.isDown) {
+        } else if(right.isDown || scene.keys.keyD.isDown) {
             moveDirection.x = 1;
             character.direction = 'right';
         }
@@ -167,14 +206,30 @@ class DamagedState extends State{
 
 class AttackState extends State{
     enter(scene, character) {
-        character.isAttacking = true;
+        character.weapon.hitBox.setActive(true);
         console.log('attacking');
         character.setVelocity(0);
+        character.handleAttackOverlap();
         character.anims.play(`attack-${character.direction}`);
         character.once('animationcomplete', () => {
             this.stateMachine.transition('idle');
             return;
         });
+    }
+}
+
+class InteractState extends State{
+    enter(scene, character){
+        console.log(`character.interacting = ${character.interacting}`);
+        character.setVelocity(0);
+        character.handleInteractOverlap();
+        // character.anims.play('interact');
+        // character.once('animationcomplete', () => {
+        //     this.stateMachine.transition('idle');
+        //     return;
+        // });
+
+        this.stateMachine.transition('idle');
     }
 }
 
