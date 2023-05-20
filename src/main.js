@@ -10,7 +10,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Load, Play]
+    scene: [Load, Play, Garden]
 }
 
 let game = new Phaser.Game(config);
@@ -27,4 +27,12 @@ let keyS = null;
 let keyD = null;
 let keyE = null;
 
-let round = 10;
+let round = 1;
+
+let characterState = {
+    weapon: new Weapon('hoe', 2, 0, 0, 50, 25),
+    maxHealth: 5,
+    currHealth: 5,
+    charXP: 0,
+    charLevel: 1
+}
