@@ -1,42 +1,45 @@
-//test test test
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, Xvelocity, Yvelocity, texture) {
-        //super(scene, 700, Phaser.Math.Between(75, 305), texture);
+    constructor(scene, x, y, Xvelocity, Yvelocity, texture, health) {
         super(scene, x, y, texture); 
         
         this.parentScene = scene;
 
-        this.parentScene.add.existing(this);    
-        this.parentScene.physics.add.existing(this);   
+        this.parentScene.add.existing(this);
+        this.parentScene.physics.add.existing(this);
         this.setVelocityX(Xvelocity);
-        this.setVelocityY(Yvelocity);           
-        this.setImmovable();                    
-        this.newEnemy = true;
+        this.setVelocityY(Yvelocity);
+        this.setImmovable();
+        this.health = health;
+        this.name = 'enemy';
     }
 
     update() {
-        if(this.newEnemy && this.x < 0) {
-            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
-            this.newEnemy = false;
+        if(this.x < 0) {
+            this.die();
         }
 
-        if(this.newEnemy && this.x > 700) {
-            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
-            this.newEnemy = false;
+        if(this.x > 700) {
+            this.die();
         }
 
-        if(this.newEnemy && this.y < 0) {
-            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
-            this.newEnemy = false;
+        if(this.y < 0) {
+            this.die();
         }
 
-        if(this.newEnemy && this.y > 350) {
-            this.parentScene.addEnemy(this.parent, this.Xvelocity, this.Yvelocity);
-            this.newEnemy = false;
+        if(this.y > 350) {
+            this.die();
         }
+    }
 
-        // if(this.x < -this.width) {
-        //     this.destroy();
-        // }
+    takeDamage(dam){
+        this.health -= dam;
+        if(this.health <= 0){
+            this.die();
+        }
+    }
+
+    die(){
+        this.parentScene.enemiesLeft -= 1;
+        this.destroy();
     }
 }

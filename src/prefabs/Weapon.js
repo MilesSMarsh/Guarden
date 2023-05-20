@@ -1,30 +1,24 @@
 class Weapon{
-    constructor(scene, name, damage, HitBox){
+    constructor(scene, name, damage, x_, y_, w_, h_){
 
+        this.parentScene = scene;
         this.name = name;
         this.damage = damage;
-        this.hitBox = HitBox;
-        this.hitBoxWidth = HitBox.width;
-        this.hitBoxHeight = HitBox.height;
-
-        
-        scene.physics.add.existing(this.hitBox).setOrigin(0.5);
-        this.hitBox.body.onOverlap = true;
-        this.hitBox.setActive(false);
-
-    }
-
-    changeHitBoxSize(width, height){
-        this.hitBox.width = width;
-        this.hitBox.height = height;
-
-        this.hitBox.body.width = width;
-        this.hitBox.body.height = height;
-
-        // this.hitBoxWidth = height;
-        // this.hitBoxHeight = width;
-
-        this.hitBox.setOrigin(0.5,0.5);
+        this.hitBox = {
+            x: x_,
+            y: y_,
+            width: w_,
+            height: h_
+        }
+        this.hitBoxWidth = w_;
+        this.hitBoxHeight = h_;
+        this.attackHitBox = scene.add.rectangle(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 0xffffff, 0.1).setOrigin(0, 0);
 
     }
+
+    changeHitBoxSize(wid, hei){
+        this.hitBoxWidth = wid;
+        this.hitBoxHeight = hei;
+    }
+
 }
