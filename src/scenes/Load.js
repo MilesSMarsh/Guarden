@@ -27,6 +27,10 @@ class Load extends Phaser.Scene {
             frameHeight: 50
         });
 
+        this.load.image('garden', './assets/tempGarden.png');
+
+        //this.load.image('enemy', './assets/tempEnemy.png');
+
         
     }
 

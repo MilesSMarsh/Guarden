@@ -5,20 +5,17 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this).setOrigin(0.5);
 
+        this.setOrigin(0, 0);
         this.setScale(0.5);
         this.body.onOverlap = true;
         this.body.setCollideWorldBounds(true);
 
-        this.interactHitBox = scene.add.rectangle(this.x, this.y ,25, 25, 0xffffff, 0.1);
-        scene.physics.add.existing(this.interactHitBox);
+        
 
+        this.parentScene = scene;
         this.direction = direction;
         this.charVelocity = 100;
         this.collided = false;
-        this.isAttaking = false;
-        this.interacting = false;
-        this.interactingWith = null;
-        this.attackingThis = null;
 
         this.currHealth = health;
         this.weapon = weapon;
@@ -29,6 +26,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
 
     }
 
+
     changeWeapon(newWeapon){
         this.weapon = newWeapon;
     }
@@ -37,55 +35,57 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         //moves hitbox
         switch(this.direction) {
             case 'up':
-                this.weapon.hitBox.x = this.x;
-                this.weapon.hitBox.y = this.y - this.height;
-                this.weapon.changeHitBoxSize(this.weapon.hitBoxWidth, this.weapon.hitBoxHeight);
+                this.weapon.hitBox.x = this.x - this.weapon.hitBoxWidth / 2;
+                this.weapon.hitBox.y = this.y - this.weapon.hitBoxHeight - 25;
+                this.weapon.hitBox.width = this.weapon.hitBoxWidth;
+                this.weapon.hitBox.height = this.weapon.hitBoxHeight;
 
-                this.interactHitBox.x = this.x;
-                this.interactHitBox.y = this.y - this.height / 1.5;
                 break;
 
             case 'down':
-                this.weapon.hitBox.x = this.x;
-                this.weapon.hitBox.y = this.y + this.height;
-                this.weapon.changeHitBoxSize(this.weapon.hitBoxWidth, this.weapon.hitBoxHeight);
-
-                this.interactHitBox.x = this.x;
-                this.interactHitBox.y = this.y + this.height / 1.5;
+                this.weapon.hitBox.x = this.x - this.weapon.hitBoxWidth / 2;
+                this.weapon.hitBox.y = this.y + 25;
+                this.weapon.hitBox.width = this.weapon.hitBoxWidth;
+                this.weapon.hitBox.height = this.weapon.hitBoxHeight;
                 break;
 
             case 'left':
-                this.weapon.hitBox.x = this.x - this.width;
-                this.weapon.hitBox.y = this.y;
-                this.weapon.changeHitBoxSize(this.weapon.hitBoxHeight, this.weapon.hitBoxWidth);
-
-                this.interactHitBox.x = this.x - this.width / 1.5;
-                this.interactHitBox.y = this.y;
+                this.weapon.hitBox.x = this.x - this.weapon.hitBoxHeight - 25;
+                this.weapon.hitBox.y = this.y - this.weapon.hitBoxWidth / 2;
+                this.weapon.hitBox.width = this.weapon.hitBoxHeight;
+                this.weapon.hitBox.height = this.weapon.hitBoxWidth;
                 break;
                 
             case 'right':
-                this.weapon.hitBox.x = this.x + this.width;
-                this.weapon.hitBox.y = this.y;
-                this.weapon.changeHitBoxSize(this.weapon.hitBoxHeight, this.weapon.hitBoxWidth);
-
-                this.interactHitBox.x = this.x + this.width / 1.5;
-                this.interactHitBox.y = this.y;
+                this.weapon.hitBox.x = this.x + 25;
+                this.weapon.hitBox.y = this.y - this.weapon.hitBoxWidth / 2;
+                this.weapon.hitBox.width = this.weapon.hitBoxHeight;
+                this.weapon.hitBox.height = this.weapon.hitBoxWidth;
                 break;
         }
+
+        this.weapon.attackHitBox.x = this.weapon.hitBox.x;
+        this.weapon.attackHitBox.y = this.weapon.hitBox.y;
+        this.weapon.attackHitBox.width = this.weapon.hitBox.width;
+        this.weapon.attackHitBox.height = this.weapon.hitBox.height;
     }
 
     handleAttackOverlap(){
-        if(this.isAttacking){
-            if(this.attackingThis != null){
-                console.log(this.attackingThis);
+        let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, false);
+        for(let i in objectsHit){
+            if(objectsHit[i].gameObject.name == 'enemy'){
+                console.log('hit an enemy');
+                objectsHit[i].gameObject.takeDamage(this.weapon.damage);
             }
         }
+    
     }
 
     handleInteractOverlap(){
-        if(this.interacting){
-            if(this.interactingWith != null){
-                console.log(this.interactingWith);
+        let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, false);
+        for(let i in objectsHit){
+            if(objectsHit[i].gameObject.name == 'garden'){
+                console.log('interact with garden');
             }
         }
     }
@@ -96,8 +96,6 @@ class Character extends Phaser.Physics.Arcade.Sprite{
 class IdleState extends State{
     enter(scene, character){
 
-        character.weapon.hitBox.setActive(false);
-        character.isAttacking = false;
         character.setVelocity(0);
         character.anims.play(`walk-${character.direction}`, true);
         character.anims.stop();
@@ -122,16 +120,10 @@ class IdleState extends State{
             this.stateMachine.transition('interact');
             return;
         }
-
-        
     }
-
 }
 
 class MoveState extends State{
-    // enter(scene, character){
-    //     character.isAttacking = false;
-    // }
     execute(scene, character){
         const { left, right, up, down, space, shift, keyE} = scene.keys;
         if(character.collided){
@@ -206,8 +198,7 @@ class DamagedState extends State{
 
 class AttackState extends State{
     enter(scene, character) {
-        character.weapon.hitBox.setActive(true);
-        console.log('attacking');
+        console.log(`character is attacking`);
         character.setVelocity(0);
         character.handleAttackOverlap();
         character.anims.play(`attack-${character.direction}`);
@@ -220,9 +211,12 @@ class AttackState extends State{
 
 class InteractState extends State{
     enter(scene, character){
-        console.log(`character.interacting = ${character.interacting}`);
+        console.log(`character is interacting`);
         character.setVelocity(0);
         character.handleInteractOverlap();
+        //
+        // if interact animation
+        //
         // character.anims.play('interact');
         // character.once('animationcomplete', () => {
         //     this.stateMachine.transition('idle');
