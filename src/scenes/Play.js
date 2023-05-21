@@ -24,8 +24,10 @@ class Play extends Phaser.Scene{
 
         this.garden = this.physics.add.staticSprite(375, 175, 'garden').setOrigin(0.5, 0.5);
         this.garden.name = 'garden';
+        this.gardenHealth = 3;
 
         this.p1Character = new Character(this, 380, 220, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.p1Character.currHealth = characterState.currHealth;
         this.hoe = new Weapon('hoe', 2, 0, 0, 50, 25);
         this.shovel = new Weapon('shovel', 2, 0, 0, 50, 25);
         
@@ -54,10 +56,19 @@ class Play extends Phaser.Scene{
 
         this.physics.add.collider(this.p1Character, this.garden);
         this.physics.add.overlap(this.enemyGroup, this.garden, this.whatup, null, this);
+        this.physics.add.overlap(this.enemyGroup, this.p1Character, this.takeDamage, null, this);
+
+        this.heart1 = this.add.tileSprite(50,30,30,30, 'heart');
+        this.heart2 = this.add.tileSprite(80,30,30,30, 'heart');
+        this.heart3 = this.add.tileSprite(110,30,30,30, 'heart');
+        this.heart4 = this.add.tileSprite(140,30,30,30, 'heart');
+        this.heart5 = this.add.tileSprite(170,30,30,30, 'heart');
 
     }
 
     update(){
+
+        //console.log(hardMode)
 
         this.characterFSM.step();
         this.p1Character.moveHitBox();
@@ -70,6 +81,50 @@ class Play extends Phaser.Scene{
         if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
             this.p1Character.changeWeapon(this.shovel);
         }
+
+        if (this.p1Character.currHealth == 4){
+            //console.log("health");
+            this.heart5.setVisible(false);
+            this.heart4.setVisible(true);
+            this.heart3.setVisible(true);
+            this.heart2.setVisible(true);
+            this.heart1.setVisible(true);
+        }
+        if (this.p1Character.currHealth == 3){
+            //console.log("health");
+            this.heart5.setVisible(false);
+            this.heart4.setVisible(false);
+            this.heart3.setVisible(true);
+            this.heart2.setVisible(true);
+            this.heart1.setVisible(true);
+        }
+        if (this.p1Character.currHealth == 2){
+            //console.log("health");
+            this.heart5.setVisible(false);
+            this.heart4.setVisible(false);
+            this.heart3.setVisible(false);
+            this.heart2.setVisible(true);
+            this.heart1.setVisible(true);
+        }
+        if (this.p1Character.currHealth == 1){
+            //console.log("health");
+            this.heart5.setVisible(false);
+            this.heart4.setVisible(false);
+            this.heart3.setVisible(false);
+            this.heart2.setVisible(false);
+            this.heart1.setVisible(true);
+        }
+        if (this.p1Character.currHealth == 0){
+            //console.log("health");
+            this.heart5.setVisible(false);
+            this.heart4.setVisible(false);
+            this.heart3.setVisible(false);
+            this.heart2.setVisible(false);
+            this.heart1.setVisible(false);
+            //maybe play a cute little animation
+            //this.scene.start('gameOverScene');
+        }
+
 
     }
 
@@ -105,7 +160,37 @@ class Play extends Phaser.Scene{
 
     whatup(enemy, garden){
         console.log("garden hit");
+        //lower garden health
+        this.gardenHealth -= 1;
+        console.log(this.gardenHealth)
         enemy.die();
+        if (this.gardenHealth == 0)
+        {
+            if (hardMode === true){
+                console.log('howdy')
+                this.scene.start('titleScene');
+            }
+            else{
+                this.scene.start('gardenScene');
+            }
+        }
+    }
+
+    takeDamage(enemy, player){
+        console.log('take damage');
+        enemy.die();
+        this.p1Character.damage();
+        if (this.p1Character.currHealth == 0){
+            console.log("hardMode: ", hardMode)
+            if (hardMode === true){
+                console.log('howdy')
+                this.scene.start('titleScene');
+            }
+            else{
+                this.scene.start('gardenScene');
+            }
+        }
+        console.log(this.p1Character.currHealth)
     }
 
 

@@ -44,6 +44,10 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         this.updateCharacterState(characterState);
     }
 
+    damage(){
+        this.currHealth -= 1;
+    }
+
     moveHitBox(){
         //moves hitbox
         switch(this.direction) {
@@ -251,9 +255,6 @@ class InteractState extends State{
         this.stateMachine.transition('idle');
     }
 }
-
-
-
 
 
     //^^^^^^ character states ^^^^^^
