@@ -10,7 +10,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Load, Play]
+    scene: [Load, Title, Garden, Play, Victory]
 }
 
 let game = new Phaser.Game(config);
@@ -27,4 +27,4 @@ let keyS = null;
 let keyD = null;
 let keyE = null;
 
-let round = 10;
+let round = 3;
