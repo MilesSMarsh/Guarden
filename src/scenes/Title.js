@@ -17,10 +17,12 @@ class Title extends Phaser.Scene {
 
         this.add.text(100, 100, 'Guarden', menuConfig);
         this.add.text(100, 200, 'Press DOWN to toggle hard mode', menuConfig);
+        this.add.text(100, 300, 'Press BACKSPACE to view tutorial', menuConfig);
         this.hardModeText = this.add.text(100, 250, 'Hard mode is on', menuConfig);
         //this.hardModeText.setVisible(false);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyBACKSPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
         //hardMode = false;
 
     }
@@ -44,5 +46,8 @@ class Title extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
           this.scene.start('gardenScene');    
         }
+        if (Phaser.Input.Keyboard.JustDown(keyBACKSPACE)) {
+            this.scene.start('tutorialScene');    
+          }
       }
 }

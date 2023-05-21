@@ -12,7 +12,7 @@ let config = {
     },
 
 
-    scene: [Load, Title, Garden, Play, Victory]
+    scene: [Load, Title, Tutorial, Garden, Play, Victory]
 
 }
 
@@ -23,6 +23,7 @@ let keyRIGHT = null;
 let keyUP = null;
 let keyDOWN = null;
 let keySPACE = null;
+let keyBACKSPACE = null;
 let keyENTER = null;
 let keyW = null;
 let keyA = null;
