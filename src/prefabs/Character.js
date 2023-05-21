@@ -9,6 +9,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         this.setScale(0.5);
         this.body.onOverlap = true;
         this.body.setCollideWorldBounds(true);
+        this.body.setSize(50, 50);
         
 
         this.parentScene = scene;
@@ -115,7 +116,7 @@ class IdleState extends State{
     enter(scene, character){
 
         character.setVelocity(0);
-        character.anims.play(`walk-${character.direction}`, true);
+        character.anims.play(`move-${character.direction}`, true);
         character.anims.stop();
 
     }
@@ -187,14 +188,14 @@ class MoveState extends State{
         // normalize movement vector, update character position, and play proper animation
         moveDirection.normalize();
         character.setVelocity(character.charVelocity * moveDirection.x, character.charVelocity * moveDirection.y);
-        character.anims.play(`walk-${character.direction}`, true);
+        character.anims.play(`move-${character.direction}`, true);
     }
 }
 
 class DamagedState extends State{
     enter(scene, character){
         console.log('oof');
-        character.anims.play(`walk-${character.direction}`);
+        character.anims.play(`move-${character.direction}`);
         character.anims.stop();
 
         switch(character.direction) {
@@ -222,6 +223,12 @@ class AttackState extends State{
         character.anims.play(`attack-${character.direction}`);
         character.once('animationcomplete', () => {
             this.stateMachine.transition('idle');
+        
+
+        
+        
+
+
             return;
         });
     }

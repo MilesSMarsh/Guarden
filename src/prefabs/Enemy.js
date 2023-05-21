@@ -1,6 +1,6 @@
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, Xvelocity, Yvelocity, texture, health) {
-        super(scene, x, y, texture); 
+    constructor(scene, x, y, Xvelocity, Yvelocity, texture, frame, health) {
+        super(scene, x, y, texture, frame); 
         
         this.parentScene = scene;
 
@@ -9,8 +9,16 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.setVelocityX(Xvelocity);
         this.setVelocityY(Yvelocity);
         this.setImmovable();
+        this.setScale(0.25);
+        this.body.setSize(50, 50);
+
         this.health = health;
         this.name = 'enemy';
+        if(Xvelocity > 0){
+            this.anims.play(`enemy-move-right`, true);
+        } else {
+            this.anims.play(`enemy-move-left`, true);
+        }
     }
 
     update() {

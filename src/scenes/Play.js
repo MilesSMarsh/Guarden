@@ -25,7 +25,7 @@ class Play extends Phaser.Scene{
         this.garden = this.physics.add.staticSprite(375, 175, 'garden').setOrigin(0.5, 0.5);
         this.garden.name = 'garden';
 
-        this.p1Character = new Character(this, 0, 0, 'temp_move', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.p1Character = new Character(this, 380, 220, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
         this.hoe = new Weapon('hoe', 2, 0, 0, 50, 25);
         this.shovel = new Weapon('shovel', 2, 0, 0, 50, 25);
         
@@ -78,22 +78,22 @@ class Play extends Phaser.Scene{
             this.num = this.getRandomInt(4);
             if (this.num == 0){
                 this.yCoord = Phaser.Math.Between(75, 305);
-                let enemy = new Enemy(this, 700, this.yCoord, -this.speed, (((this.yCoord - 175))/350)*-this.speed,'enemy', this.enemyHealth);
+                let enemy = new Enemy(this, 700, this.yCoord, -this.speed, (((this.yCoord - 175))/350)*-this.speed,'enemy-move-right-sheet', 0,  this.enemyHealth);
                 this.enemyGroup.add(enemy);
             }
             if (this.num == 1){
                 this.yCoord = Phaser.Math.Between(75, 305);
-                let enemy = new Enemy(this, 0, this.yCoord, this.speed, ((-(this.yCoord - 175))/350)*this.speed,'enemy', this.enemyHealth);
+                let enemy = new Enemy(this, 0, this.yCoord, this.speed, ((-(this.yCoord - 175))/350)*this.speed,'enemy-move-right-sheet', 0, this.enemyHealth);
                 this.enemyGroup.add(enemy);
             }
             if (this.num == 2){
                 this.xCoord = Phaser.Math.Between(50,650)
-                let enemy = new Enemy(this, this.xCoord, 0, ((-(this.xCoord - 350))/175)*(this.speed/2), (this.speed/ 2) ,'enemy', this.enemyHealth);
+                let enemy = new Enemy(this, this.xCoord, 0, ((-(this.xCoord - 350))/175)*(this.speed/2), (this.speed/ 2),'enemy-move-right-sheet', 0, this.enemyHealth);
                 this.enemyGroup.add(enemy);
             }
             if (this.num == 3){
                 this.xCoord = Phaser.Math.Between(50,650);
-                let enemy = new Enemy(this, this.xCoord, 350, (((this.xCoord - 350))/175)*-(this.speed/2), (-this.speed/2), 'enemy', this.enemyHealth);
+                let enemy = new Enemy(this, this.xCoord, 350, (((this.xCoord - 350))/175)*-(this.speed/2), (-this.speed/2), 'enemy-move-right-sheet', 0, this.enemyHealth);
                 this.enemyGroup.add(enemy);
             }
         }

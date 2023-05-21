@@ -1,4 +1,3 @@
-
 class Garden extends Phaser.Scene{
     constructor(){
         super('gardenScene');
@@ -21,7 +20,6 @@ class Garden extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.add.text(100, 100, 'Garden', menuConfig);
 
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
@@ -34,7 +32,7 @@ class Garden extends Phaser.Scene{
         this.keys.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
-        this.p1Character = new Character(this, game.config.width/2, game.config.height/2, 'temp_move', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.p1Character = new Character(this, 70, 300, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
 
         this.characterFSM = new StateMachine('idle', {
             idle: new IdleState(),
