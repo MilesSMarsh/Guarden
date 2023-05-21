@@ -1,5 +1,5 @@
 class Character extends Phaser.Physics.Arcade.Sprite{
-    constructor(scene, x, y, texture, frame, direction, weapon, health){
+    constructor(scene, x, y, texture, frame, direction, characterState){
         super(scene, x, y, texture, frame);
 
         scene.add.existing(this);
@@ -9,7 +9,6 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         this.setScale(0.5);
         this.body.onOverlap = true;
         this.body.setCollideWorldBounds(true);
-
         
 
         this.parentScene = scene;
@@ -17,18 +16,31 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         this.charVelocity = 100;
         this.collided = false;
 
-        this.currHealth = health;
-        this.weapon = weapon;
-        this.level = 1;
-        this.xp = 0;
+        this.maxHealth;
+        this.currHealth;
+        this.weapon = null;
+        this.charLevel;
+        this.charXP;
 
-
+        this.updateCharacterState(characterState);
 
     }
 
 
+    updateCharacterState(characterState){
+        console.log(this.weapon);
+        for(const [key, value] of Object.entries(characterState)){
+            console.log(key, value, this.hasOwnProperty(key));
+            if(this.hasOwnProperty(key)){
+                this[key] = value;
+            }
+        }
+    }
+
+
     changeWeapon(newWeapon){
-        this.weapon = newWeapon;
+        characterState.weapon = newWeapon;
+        this.updateCharacterState(characterState);
     }
 
     moveHitBox(){
@@ -39,7 +51,6 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 this.weapon.hitBox.y = this.y - this.weapon.hitBoxHeight - 25;
                 this.weapon.hitBox.width = this.weapon.hitBoxWidth;
                 this.weapon.hitBox.height = this.weapon.hitBoxHeight;
-
                 break;
 
             case 'down':
@@ -64,10 +75,10 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 break;
         }
 
-        this.weapon.attackHitBox.x = this.weapon.hitBox.x;
-        this.weapon.attackHitBox.y = this.weapon.hitBox.y;
-        this.weapon.attackHitBox.width = this.weapon.hitBox.width;
-        this.weapon.attackHitBox.height = this.weapon.hitBox.height;
+        // this.weapon.attackHitBox.x = this.weapon.hitBox.x;
+        // this.weapon.attackHitBox.y = this.weapon.hitBox.y;
+        // this.weapon.attackHitBox.width = this.weapon.hitBox.width;
+        // this.weapon.attackHitBox.height = this.weapon.hitBox.height;
     }
 
     handleAttackOverlap(){
@@ -82,10 +93,17 @@ class Character extends Phaser.Physics.Arcade.Sprite{
     }
 
     handleInteractOverlap(){
-        let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, false);
+        let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, true);
         for(let i in objectsHit){
+            console.log(i);
             if(objectsHit[i].gameObject.name == 'garden'){
-                console.log('interact with garden');
+                if(this.parentScene.roundOver){
+                    this.parentScene.scene.start('gardenScene');}
+            }
+            if(objectsHit[i].gameObject.name == 'gate'){
+                round += 1;
+                this.parentScene.scene.start('playScene');
+                    
             }
         }
     }
