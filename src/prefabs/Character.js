@@ -29,9 +29,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
 
 
     updateCharacterState(characterState){
-        console.log(this.weapon);
         for(const [key, value] of Object.entries(characterState)){
-            console.log(key, value, this.hasOwnProperty(key));
             if(this.hasOwnProperty(key)){
                 this[key] = value;
             }
@@ -90,7 +88,6 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, false);
         for(let i in objectsHit){
             if(objectsHit[i].gameObject.name == 'enemy'){
-                console.log('hit an enemy');
                 objectsHit[i].gameObject.takeDamage(this.weapon.damage);
             }
         }
@@ -100,7 +97,6 @@ class Character extends Phaser.Physics.Arcade.Sprite{
     handleInteractOverlap(){
         let objectsHit = this.parentScene.physics.overlapRect(this.weapon.hitBox.x, this.weapon.hitBox.y, this.weapon.hitBox.width, this.weapon.hitBox.height, true, true);
         for(let i in objectsHit){
-            console.log(i);
             if(objectsHit[i].gameObject.name == 'garden'){
                 if(this.parentScene.roundOver){
                     this.parentScene.scene.start('gardenScene');}
@@ -198,7 +194,6 @@ class MoveState extends State{
 
 class DamagedState extends State{
     enter(scene, character){
-        console.log('oof');
         character.anims.play(`move-${character.direction}`);
         character.anims.stop();
 
@@ -221,7 +216,6 @@ class DamagedState extends State{
 
 class AttackState extends State{
     enter(scene, character) {
-        console.log(`character is attacking`);
         character.setVelocity(0);
         character.handleAttackOverlap();
         character.anims.play(`attack-${character.direction}`);
@@ -240,7 +234,6 @@ class AttackState extends State{
 
 class InteractState extends State{
     enter(scene, character){
-        console.log(`character is interacting`);
         character.setVelocity(0);
         character.handleInteractOverlap();
         //

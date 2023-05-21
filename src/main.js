@@ -12,7 +12,7 @@ let config = {
     },
 
 
-    scene: [Load, Title, Tutorial, Garden, Play, Victory]
+    scene: [Load, Title, Menu, Tutorial, Garden, Play, Victory]
 
 }
 
@@ -32,12 +32,13 @@ let keyD = null;
 let keyE = null;
 let hardMode = false;
 
-let round = 1;
+let round = 0;
 
 let characterState = {
     weapon: new Weapon('hoe', 2, 0, 0, 50, 25),
     maxHealth: 5,
     currHealth: 5,
     charXP: 0,
-    charLevel: 1
+    charLevel: 1,
+    startOfRoundHealth : 5
 }

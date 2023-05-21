@@ -48,7 +48,6 @@ class Play extends Phaser.Scene{
 
         for (let i = 0; i < (round)*3; i += 1){
             this.clock = this.time.delayedCall((i/round)*1000, () => {
-                console.log('spawn enemy');
                 this.addEnemy();
                 this.enemiesLeft += 1;
             }, null, this);
@@ -75,7 +74,6 @@ class Play extends Phaser.Scene{
 
         if(this.enemiesLeft <= 0){
             this.roundOver = true;
-            console.log(`round over ${this.roundOver}`);
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
@@ -159,15 +157,12 @@ class Play extends Phaser.Scene{
     }
 
     whatup(enemy, garden){
-        console.log("garden hit");
         //lower garden health
         this.gardenHealth -= 1;
-        console.log(this.gardenHealth)
         enemy.die();
         if (this.gardenHealth == 0)
         {
             if (hardMode === true){
-                console.log('howdy')
                 this.scene.start('titleScene');
             }
             else{
@@ -177,20 +172,16 @@ class Play extends Phaser.Scene{
     }
 
     takeDamage(enemy, player){
-        console.log('take damage');
         enemy.die();
         this.p1Character.damage();
         if (this.p1Character.currHealth == 0){
-            console.log("hardMode: ", hardMode)
             if (hardMode === true){
-                console.log('howdy')
                 this.scene.start('titleScene');
             }
             else{
                 this.scene.start('gardenScene');
             }
         }
-        console.log(this.p1Character.currHealth)
     }
 
 
