@@ -25,8 +25,9 @@ class Play extends Phaser.Scene{
         this.garden = this.physics.add.staticSprite(375, 175, 'garden').setOrigin(0.5, 0.5);
         this.garden.name = 'garden';
 
-        this.p1Character = new Character(this, game.config.width/2, game.config.height/2, 'temp_move', 0, 'right', characterState).setOrigin(0.5, 0.5);
-        
+        this.p1Character = new Character(this, 0, 0, 'temp_move', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.hoe = new Weapon('hoe', 2, 0, 0, 50, 25);
+        this.shovel = new Weapon('shovel', 2, 0, 0, 50, 25);
         
         //create state machine for new character
         this.characterFSM = new StateMachine('idle', {
@@ -54,7 +55,6 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.p1Character, this.garden);
         this.physics.add.overlap(this.enemyGroup, this.garden, this.whatup, null, this);
 
-
     }
 
     update(){
@@ -67,9 +67,11 @@ class Play extends Phaser.Scene{
             console.log(`round over ${this.roundOver}`);
         }
 
-    }
+        if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
+            this.p1Character.changeWeapon(this.shovel);
+        }
 
-    
+    }
 
     addEnemy(){
         if (this.gameOver == false){ 
