@@ -16,11 +16,31 @@ class Title extends Phaser.Scene {
         }
 
         this.add.text(100, 100, 'Guarden', menuConfig);
+        this.add.text(100, 200, 'Press DOWN to toggle hard mode', menuConfig);
+        this.hardModeText = this.add.text(100, 250, 'Hard mode is on', menuConfig);
+        //this.hardModeText.setVisible(false);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        //hardMode = false;
 
     }
 
     update() {
+
+        //console.log(hardMode)
+        this.hardModeText.setVisible(false);
+        if (hardMode == true) {
+            this.hardModeText.setVisible(true);
+        }
+        if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
+            if (hardMode == false){
+                hardMode = true;    
+            }
+            else {
+                hardMode = false;
+            }
+            console.log(hardMode);
+          }
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
           this.scene.start('gardenScene');    
         }

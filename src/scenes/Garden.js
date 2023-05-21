@@ -50,6 +50,9 @@ class Garden extends Phaser.Scene{
 
     }
     update(){
+
+        //console.log(hardMode)
+
         this.characterFSM.step();
         this.p1Character.moveHitBox();
       

@@ -29,6 +29,7 @@ let keyA = null;
 let keyS = null;
 let keyD = null;
 let keyE = null;
+let hardMode = false;
 
 let round = 1;
 
