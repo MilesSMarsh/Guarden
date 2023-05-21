@@ -1,3 +1,4 @@
+
 class Garden extends Phaser.Scene{
     constructor(){
         super('gardenScene');
@@ -7,6 +8,20 @@ class Garden extends Phaser.Scene{
         this.cameras.main.setBackgroundColor('0xFFFF00');
 
         this.add.image(0, 0, 'gardenScene').setOrigin(0, 0);
+      
+        
+        let menuConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        this.add.text(100, 100, 'Garden', menuConfig);
 
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
@@ -17,6 +32,7 @@ class Garden extends Phaser.Scene{
         this.keys.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keys.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.keys.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         this.p1Character = new Character(this, game.config.width/2, game.config.height/2, 'temp_move', 0, 'right', characterState).setOrigin(0.5, 0.5);
 
@@ -36,5 +52,10 @@ class Garden extends Phaser.Scene{
     update(){
         this.characterFSM.step();
         this.p1Character.moveHitBox();
+      
+        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+          this.scene.start('playScene');    
+        }
     }
+
 }
