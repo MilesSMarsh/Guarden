@@ -74,6 +74,12 @@ class Load extends Phaser.Scene {
             frameHeight: 100
         });        
 
+
+        this.load.audio('background_music', './assets/backgroundMusic.mp3');
+
+        this.load.audio('combat_music', './assets/combatMusic.mp3');
+
+
         this.load.image('title', './assets/Guarden_Title.png');
 
         this.load.image('garden', './assets/tempGarden.png');

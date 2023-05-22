@@ -20,6 +20,12 @@ class Garden extends Phaser.Scene{
             fixedWidth: 0
         }
 
+        this.gameplayMusic = this.sound.add('background_music');
+        this.gameplayMusic.loop = true;
+        this.gameplayMusic.play();
+
+
+        this.add.text(350, 25, `Next Round: ${round + 1}`, menuConfig);
         this.add.text(25, 230, 'GATE', menuConfig);
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
@@ -56,6 +62,7 @@ class Garden extends Phaser.Scene{
       
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
           this.scene.start('playScene');    
+          this.gameplayMusic.stop();
         }
     }
 

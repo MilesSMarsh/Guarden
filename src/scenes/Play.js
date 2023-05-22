@@ -5,6 +5,28 @@ class Play extends Phaser.Scene{
     create(){
         this.cameras.main.setBackgroundColor('0x135711');
 
+        let menuConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        let textConfig = {
+            fontFamily: 'Courier',
+            fontSize: '9px',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
 
         this.keys = this.input.keyboard.createCursorKeys();
         this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -22,9 +44,21 @@ class Play extends Phaser.Scene{
 
         this.enemyHealth = 2;
 
+
+        this.interactText = this.add.text(375, 140, 'Press E on garden', textConfig).setOrigin(0.5, 0.5);
+        this.interactText.setVisible(false);
+
         this.garden = this.physics.add.staticSprite(375, 175, 'garden').setOrigin(0.5, 0.5);
         this.garden.name = 'garden';
         this.gardenHealth = 3;
+
+
+        this.add.text(350, 25, `Round: ${round}`, menuConfig);
+
+        this.gameplayMusic = this.sound.add('combat_music');
+        this.gameplayMusic.loop = true;
+        this.gameplayMusic.play();
+
 
         this.p1Character = new Character(this, 380, 220, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
         this.p1Character.currHealth = characterState.currHealth;
@@ -40,6 +74,9 @@ class Play extends Phaser.Scene{
             interact: new InteractState()
         }, [this, this.p1Character]);
 
+        //Music from #Uppbeat (free for Creators!):
+        //https://uppbeat.io/t/moire/bees-in-the-garden
+        //License code: CNJBGQ0Y7QR1DZ9S
 
         this.enemyGroup = this.add.group({
             runChildUpdate: true
@@ -74,6 +111,7 @@ class Play extends Phaser.Scene{
 
         if(this.enemiesLeft <= 0){
             this.roundOver = true;
+            this.interactText.setVisible(true);
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
@@ -164,9 +202,11 @@ class Play extends Phaser.Scene{
         {
             if (hardMode === true){
                 this.scene.start('titleScene');
+                this.gameplayMusic.stop();
             }
             else{
                 this.scene.start('gardenScene');
+                this.gameplayMusic.stop();
             }
         }
     }
@@ -177,9 +217,11 @@ class Play extends Phaser.Scene{
         if (this.p1Character.currHealth == 0){
             if (hardMode === true){
                 this.scene.start('titleScene');
+                this.gameplayMusic.stop();
             }
             else{
                 this.scene.start('gardenScene');
+                this.gameplayMusic.stop();
             }
         }
     }
