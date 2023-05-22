@@ -16,7 +16,9 @@ class Menu extends Phaser.Scene {
         }
 
         
-        this.add.text(100, 100, 'Guarden', menuConfig);
+        this.add.text(100, 50, 'Guarden', menuConfig);
+
+        this.add.text(100, 100, 'Press SPACE to start', menuConfig);
         this.add.text(100, 200, 'Press DOWN to toggle hard mode', menuConfig);
         this.add.text(100, 300, 'Press BACKSPACE to view tutorial', menuConfig);
         this.hardModeText = this.add.text(100, 250, 'Hard mode is on', menuConfig);

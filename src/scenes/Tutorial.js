@@ -41,7 +41,7 @@ class Tutorial extends Phaser.Scene {
 
     update() {
     if (Phaser.Input.Keyboard.JustDown(keyBACKSPACE)) {
-          this.scene.start('titleScene');    
+          this.scene.start('menuScene');    
         }
       }
 }

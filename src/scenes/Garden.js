@@ -20,7 +20,7 @@ class Garden extends Phaser.Scene{
             fixedWidth: 0
         }
 
-
+        this.add.text(25, 230, 'GATE', menuConfig);
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
 
