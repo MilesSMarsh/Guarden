@@ -90,6 +90,21 @@ class Load extends Phaser.Scene {
 
         this.load.image('heart', './assets/heart.png');
 
+        this.load.image('carrot1', './assets/Plants/Carrot/Plant1.png');
+        this.load.image('carrot2', './assets/Plants/Carrot/Carrot2.png');
+        this.load.image('carrot3', './assets/Plants/Carrot/Carrot3.png');
+        this.load.image('carrot4', './assets/Plants/Carrot/Carrot.png');
+
+        this.load.image('pepper1', './assets/Plants/Power_Pepper/Plant1.png');
+        this.load.image('pepper2', './assets/Plants/Power_Pepper/PowerPepper2.png');
+        this.load.image('pepper3', './assets/Plants/Power_Pepper/PowerPepper3.png');
+        this.load.image('pepper4', './assets/Plants/Power_Pepper/PowerPepper.png');
+
+        this.load.image('radish1', './assets/Plants/Radish/Plant1.png');
+        this.load.image('radish2', './assets/Plants/Radish/Radish2.png');
+        this.load.image('radish3', './assets/Plants/Radish/Radish3.png');
+        this.load.image('radish4', './assets/Plants/Radish/Radish.png');
+
         //this.load.image('enemy', './assets/tempEnemy.png');
 
         
@@ -159,6 +174,13 @@ class Load extends Phaser.Scene {
             frameRate: 8,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('enemy-move-right-sheet', {start: 0, end:1})
+        });
+
+        this.anims.create({
+            key: 'carrot-sheet',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('carrot-sheet', {start: 0, end: 3})
         });
 
 
