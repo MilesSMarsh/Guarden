@@ -35,11 +35,13 @@ class Tutorial extends Phaser.Scene {
             fixedWidth: 0
         }
 
+
+        this.add.text(30, 20, 'Game by: Miles Marsh, Sean Rowley, Wendy Chen, Brandon Tanega', wordConfig);
         this.add.text(50, 50, 'Tutorial:', menuConfig);
         this.add.text(50, 80, 'The aim of the game is to protect your garden from critters.', wordConfig);
         this.add.text(50, 100, 'The critters will show up in waves, and each wave will be', wordConfig);
         this.add.text(50, 120, 'tougher than the last.', wordConfig);
-        this.add.text(50, 140, 'Interact with the fence and garden respectively to move', wordConfig);
+        this.add.text(50, 140, 'Interact with the gate and garden respectively to move', wordConfig);
         this.add.text(50, 160, 'between scenes.', wordConfig);
         this.add.text(50, 180, 'Controls:', menuConfig);
         this.add.text(50, 210, 'Move using WASD or Arrows, and press Space to Attack', wordConfig);
