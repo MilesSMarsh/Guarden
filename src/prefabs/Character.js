@@ -116,6 +116,16 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 this.parentScene.gameplayMusic.stop()
                     
             }
+
+            if(objectsHit[i].gameObject.name == 'spades'){
+                console.log('equip spades');
+                this.changeWeapon(new Weapon('spades', 3, 0, 0, 50, 25));
+            }
+
+            if(objectsHit[i].gameObject.name == 'shovel'){
+                console.log('equip shovel');
+                this.changeWeapon(new Weapon('shovel', 2, 0, 0, 50, 25));
+            }
         }
     }
     
@@ -126,7 +136,7 @@ class IdleState extends State{
     enter(scene, character){
 
         character.setVelocity(0);
-        character.anims.play(`move-${character.direction}`, true);
+        character.anims.play(`${character.weapon.name}-move-${character.direction}`, true);
         character.anims.stop();
 
     }
@@ -198,7 +208,7 @@ class MoveState extends State{
         // normalize movement vector, update character position, and play proper animation
         moveDirection.normalize();
         character.setVelocity(character.charVelocity * moveDirection.x, character.charVelocity * moveDirection.y);
-        character.anims.play(`move-${character.direction}`, true);
+        character.anims.play(`${character.weapon.name}-move-${character.direction}`, true);
     }
 }
 
@@ -228,7 +238,7 @@ class AttackState extends State{
     enter(scene, character) {
         character.setVelocity(0);
         character.handleAttackOverlap();
-        character.anims.play(`attack-${character.direction}`);
+        character.anims.play(`${character.weapon.name}-attack-${character.direction}`);
         character.once('animationcomplete', () => {
             this.stateMachine.transition('idle');
         

@@ -73,7 +73,7 @@ class Play extends Phaser.Scene{
         this.gameplayMusic.play();
 
 
-        this.p1Character = new Character(this, 380, 220, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.p1Character = new Character(this, 380, 220, `move-right-${characterState.weapon.name}-sheet`, 0, 'right', characterState).setOrigin(0.5, 0.5);
         this.p1Character.currHealth = characterState.currHealth;
         this.hoe = new Weapon('hoe', 2, 0, 0, 50, 25);
         this.shovel = new Weapon('shovel', 2, 0, 0, 50, 25);

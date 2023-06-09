@@ -7,7 +7,7 @@ let config = {
     physics:{
         default: "arcade",
         arcade : {
-            //debug: true
+            debug: true
         }
     },
 
@@ -37,7 +37,7 @@ let numOfSnails = 0;
 let numOfRats = 0;
 
 let characterState = {
-    weapon: new Weapon('hoe', 2, 0, 0, 50, 25),
+    weapon: new Weapon('shovel', 2, 0, 0, 50, 25),
     maxHealth: 5,
     currHealth: 5,
     charXP: 0,

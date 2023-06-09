@@ -61,6 +61,14 @@ class Garden extends Phaser.Scene{
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
 
+
+        this.spades = this.physics.add.staticSprite(600, 100, 'spades').setOrigin(0.5, 0.5);
+        this.spades.setSize(30, 10);
+        this.spades.name = 'spades';
+        this.shovel = this.physics.add.staticSprite(500, 100, 'shovel').setOrigin(0.5, 0.5);
+        this.shovel.setSize(50, 50);
+        this.shovel.name = 'shovel';
+
         this.keys = this.input.keyboard.createCursorKeys();
         this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keys.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -69,7 +77,7 @@ class Garden extends Phaser.Scene{
         this.keys.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
-        this.p1Character = new Character(this, 70, 300, 'move-right-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
+        this.p1Character = new Character(this, 70, 300, 'move-right-shovel-sheet', 0, 'right', characterState).setOrigin(0.5, 0.5);
 
         this.characterFSM = new StateMachine('idle', {
             idle: new IdleState(),
@@ -82,6 +90,10 @@ class Garden extends Phaser.Scene{
 
 
         this.physics.add.collider(this.p1Character, this.gate);
+
+        this.physics.add.collider(this.p1Character, this.shovel);
+
+        this.physics.add.collider(this.p1Character, this.spades);
 
     }
     update(){
