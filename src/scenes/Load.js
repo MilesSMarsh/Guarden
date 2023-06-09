@@ -52,11 +52,20 @@ class Load extends Phaser.Scene {
             frameHeight: 100
         });
 
-        this.load.spritesheet('enemy-move-left-sheet', './assets/Pests/Snail/Left/Sprite_Sheet_Snail_Left.png',{
+        this.load.spritesheet('snail-move-left-sheet', './assets/Pests/Snail/Left/Sprite_Sheet_Snail_Left.png',{
             frameWidth: 100,
             frameHeight: 100
         });
-        this.load.spritesheet('enemy-move-right-sheet', './assets/Pests/Snail/Right/Sprite_Sheet_Snail_Right.png',{
+        this.load.spritesheet('snail-move-right-sheet', './assets/Pests/Snail/Right/Sprite_Sheet_Snail_Right.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+
+        this.load.spritesheet('rat-move-left-sheet', './assets/Pests/Rat/Left/Sprite_Sheet_Rat_Left.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('rat-move-right-sheet', './assets/Pests/Rat/Right/Sprite_Sheet_Rat_Right.png',{
             frameWidth: 100,
             frameHeight: 100
         });
@@ -164,16 +173,29 @@ class Load extends Phaser.Scene {
         
 
         this.anims.create({
-            key: 'enemy-move-left',
+            key: 'snail-move-left',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('enemy-move-left-sheet', {start: 0, end:1})
+            frames: this.anims.generateFrameNumbers('snail-move-left-sheet', {start: 0, end:1})
         });
         this.anims.create({
-            key: 'enemy-move-right',
+            key: 'snail-move-right',
             frameRate: 8,
             repeat: 0,
-            frames: this.anims.generateFrameNumbers('enemy-move-right-sheet', {start: 0, end:1})
+            frames: this.anims.generateFrameNumbers('snail-move-right-sheet', {start: 0, end:1})
+        });
+
+        this.anims.create({
+            key: 'rat-move-left',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('rat-move-left-sheet', {start: 0, end:1})
+        });
+        this.anims.create({
+            key: 'rat-move-right',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('rat-move-right-sheet', {start: 0, end:1})
         });
 
         this.anims.create({

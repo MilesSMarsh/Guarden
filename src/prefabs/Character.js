@@ -103,6 +103,12 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                     this.parentScene.gameplayMusic.stop()
             }
             if(objectsHit[i].gameObject.name == 'gate'){
+                if (round % 2 == 0){
+                    numOfSnails += 3;
+                }
+                else {
+                    numOfRats += 2;
+                }
                 round += 1;
                 this.parentScene.scene.start('playScene');
 

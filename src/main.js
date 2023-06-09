@@ -33,6 +33,8 @@ let keyE = null;
 let hardMode = false;
 
 let round = 0;
+let numOfSnails = 0;
+let numOfRats = 0;
 
 let characterState = {
     weapon: new Weapon('hoe', 2, 0, 0, 50, 25),
