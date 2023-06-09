@@ -1,5 +1,5 @@
 class Enemy extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, Xvelocity, Yvelocity, texture, frame, health) {
+    constructor(scene, x, y, Xvelocity, Yvelocity, texture, frame, health, name) {
         super(scene, x, y, texture, frame); 
         
         this.parentScene = scene;
@@ -15,9 +15,19 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.health = health;
         this.name = 'enemy';
         if(Xvelocity > 0){
-            this.anims.play(`enemy-move-right`, true);
+            if (name == 'snail'){
+                this.anims.play(`snail-move-right`, true);
+            }
+            if (name == 'rat'){
+                this.anims.play('rat-move-right', true);
+            }
         } else {
-            this.anims.play(`enemy-move-left`, true);
+            if (name == 'snail'){
+                this.anims.play(`snail-move-left`, true);
+            }
+            if (name == 'rat'){
+                this.anims.play('rat-move-left', true);
+            }
         }
     }
 
@@ -47,7 +57,13 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     die(){
-        this.parentScene.enemiesLeft -= 1;
-        this.destroy();
+        if (round % 2 != 0){
+            this.parentScene.snailsLeft -= 1;
+            this.destroy();
+        }
+        else{
+            this.parentScene.ratsLeft -= 1;
+            this.destroy();
+        }
     }
 }
