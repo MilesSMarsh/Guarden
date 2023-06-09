@@ -30,6 +30,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
 
     updateCharacterState(characterState){
         for(const [key, value] of Object.entries(characterState)){
+            console.log(key)
             if(this.hasOwnProperty(key)){
                 this[key] = value;
             }
