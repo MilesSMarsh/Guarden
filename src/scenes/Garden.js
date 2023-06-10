@@ -68,6 +68,9 @@ class Garden extends Phaser.Scene{
         this.shovel = this.physics.add.staticSprite(500, 100, 'shovel').setOrigin(0.5, 0.5);
         this.shovel.setSize(50, 50);
         this.shovel.name = 'shovel';
+        this.rake = this.physics.add.staticSprite(500, 200, 'rake').setOrigin(0.5, 0.5);
+        this.rake.setSize(50, 50);
+        this.rake.name = 'rake';
 
         this.keys = this.input.keyboard.createCursorKeys();
         this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);

@@ -126,6 +126,11 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 console.log('equip shovel');
                 this.changeWeapon(new Weapon('shovel', 2, 0, 0, 50, 25));
             }
+
+            if(objectsHit[i].gameObject.name == 'rake'){
+                console.log('equip rake');
+                this.changeWeapon(new Weapon('rake', 2, 0, 0, 50, 25));
+            }
         }
     }
     

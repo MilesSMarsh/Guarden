@@ -98,6 +98,44 @@ class Load extends Phaser.Scene {
             frameHeight: 100
         });
 
+        //Rake
+
+        this.load.image('rake', './assets/Rake_Assets/Rake.png');
+
+        this.load.spritesheet('move-down-rake-sheet', 'assets/Rake_Assets/Down/Move/Sprite_Sheet_Rake_Down.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('move-left-rake-sheet', 'assets/Rake_Assets/Left/Shoulder/Move/Sprite_Sheet_Rake_Left_Shoulder.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('move-right-rake-sheet', 'assets/Rake_Assets/Right/Shoulder/Move/Sprite_Sheet_Rake_Right_Shoulder.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('move-up-rake-sheet', 'assets/Rake_Assets/Up/Move/Sprite_Sheet_Rake_Up.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+
+
+        this.load.spritesheet('attack-down-rake-sheet', 'assets/Rake_Assets/Down/Attack/Sprite_Sheet_Rake_Down_Attack.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('attack-left-rake-sheet', 'assets/Rake_Assets/Left/Forward/Attack/Sprite_Sheet_Rake_Left_Attack_forward.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('attack-right-rake-sheet', 'assets/Rake_Assets/Right/Forward/Attack/Sprite_Sheet_Rake_Right_Attack_Forward.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
+        this.load.spritesheet('attack-up-rake-sheet', 'assets/Rake_Assets/Up/Attack/Sprite_Sheet_Rake_Up_Attack.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        });
 
 
 
@@ -283,7 +321,57 @@ class Load extends Phaser.Scene {
         });
 
 
+        //rake
+        this.anims.create({
+            key: 'rake-move-right',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('move-right-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-move-left',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('move-left-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-move-up',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('move-up-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-move-down',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('move-down-rake-sheet', {start: 0, end:2})
+        });
 
+
+        this.anims.create({
+            key: 'rake-attack-right',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('attack-right-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-attack-left',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('attack-left-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-attack-up',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('attack-up-rake-sheet', {start: 0, end:2})
+        });
+        this.anims.create({
+            key: 'rake-attack-down',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('attack-down-rake-sheet', {start: 0, end:2})
+        });
 
 
 
