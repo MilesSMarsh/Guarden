@@ -70,7 +70,9 @@ class Garden extends Phaser.Scene{
 
         this.gameplayMusic = this.sound.add('background_music');
         this.gameplayMusic.loop = true;
-        this.gameplayMusic.play();
+        if (round != 5){
+            this.gameplayMusic.play();
+        }
 
 
         this.add.text(350, 25, `Next Round: ${round + 1}`, menuConfig);

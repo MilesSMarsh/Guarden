@@ -100,8 +100,16 @@ class Character extends Phaser.Physics.Arcade.Sprite{
         for(let i in objectsHit){
             if(objectsHit[i].gameObject.name == 'garden'){
                 if(this.parentScene.roundOver){
-                    this.parentScene.scene.start('gardenScene');}
+                    //console.log("this is where the scene transition starts")
+                    if (round == 5){
+                        this.parentScene.gameplayMusic.stop()
+                        return_from_victory_screen = true;
+                        this.parentScene.scene.start('victoryScene')
+                        this.parentScene.gameplayMusic.stop()
+                    }
                     this.parentScene.gameplayMusic.stop()
+                    this.parentScene.scene.start('gardenScene');
+                    this.parentScene.gameplayMusic.stop()}
             }
             if(objectsHit[i].gameObject.name == 'gate'){
                 if (round % 2 == 0){
