@@ -124,6 +124,8 @@ class Play extends Phaser.Scene{
         this.heart3 = this.add.tileSprite(110,30,30,30, 'heart');
         this.heart4 = this.add.tileSprite(140,30,30,30, 'heart');
         this.heart5 = this.add.tileSprite(170,30,30,30, 'heart');
+        this.heart6 = this.add.tileSprite(200,30,30,30, 'heart');
+        this.heart6.setVisible(false);
 
     }
 
@@ -157,8 +159,27 @@ class Play extends Phaser.Scene{
             this.sound.play('click');
         }
 
+        if (this.p1Character.currHealth == 6){
+            //console.log("health");
+            this.heart6.setVisible(true);
+            this.heart5.setVisible(true);
+            this.heart4.setVisible(true);
+            this.heart3.setVisible(true);
+            this.heart2.setVisible(true);
+            this.heart1.setVisible(true);
+        }
+        if (this.p1Character.currHealth == 5){
+            //console.log("health");
+            this.heart6.setVisible(false);
+            this.heart5.setVisible(true);
+            this.heart4.setVisible(true);
+            this.heart3.setVisible(true);
+            this.heart2.setVisible(true);
+            this.heart1.setVisible(true);
+        }
         if (this.p1Character.currHealth == 4){
             //console.log("health");
+            this.heart6.setVisible(false);
             this.heart5.setVisible(false);
             this.heart4.setVisible(true);
             this.heart3.setVisible(true);
@@ -167,6 +188,7 @@ class Play extends Phaser.Scene{
         }
         if (this.p1Character.currHealth == 3){
             //console.log("health");
+            this.heart6.setVisible(false);
             this.heart5.setVisible(false);
             this.heart4.setVisible(false);
             this.heart3.setVisible(true);
@@ -175,6 +197,7 @@ class Play extends Phaser.Scene{
         }
         if (this.p1Character.currHealth == 2){
             //console.log("health");
+            this.heart6.setVisible(false);
             this.heart5.setVisible(false);
             this.heart4.setVisible(false);
             this.heart3.setVisible(false);
@@ -183,6 +206,7 @@ class Play extends Phaser.Scene{
         }
         if (this.p1Character.currHealth == 1){
             //console.log("health");
+            this.heart6.setVisible(false);
             this.heart5.setVisible(false);
             this.heart4.setVisible(false);
             this.heart3.setVisible(false);
@@ -191,6 +215,7 @@ class Play extends Phaser.Scene{
         }
         if (this.p1Character.currHealth == 0){
             //console.log("health");
+            this.heart6.setVisible(false);
             this.heart5.setVisible(false);
             this.heart4.setVisible(false);
             this.heart3.setVisible(false);
