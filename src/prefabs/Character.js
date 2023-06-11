@@ -41,6 +41,7 @@ class Character extends Phaser.Physics.Arcade.Sprite{
     changeWeapon(newWeapon){
         characterState.weapon = newWeapon;
         this.updateCharacterState(characterState);
+        this.parentScene.sound.play('click');
     }
 
     damage(){

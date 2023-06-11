@@ -290,10 +290,11 @@ class Garden extends Phaser.Scene{
     hide_seed(){
         if (Phaser.Input.Keyboard.JustDown(this.keys.keyE)){
             console.log('in front seed');
+            this.sound.play('click');
             if (!pickedUp) {
                 this.sblightningf.setVisible(false);
                 seed = this.lightning1;
-                this.plottext = this.add.text(45, 25, 'Go to a top row plot to plant it');
+                this.plottext = this.add.text(40, 25, 'Go to a top row plot to plant it');
                 pickedUp = true;
             }
         }
@@ -306,9 +307,11 @@ class Garden extends Phaser.Scene{
             if (seed = this.lightning1 && !planted) {
                 this.lightning0.setVisible(true);
                 planted = true;
-            } else if (this.lightning3.setVisible(true)){
+                this.sound.play('plant');
+            } else if (this.lightning3.visible){
                 // increase player speed
                 console.log('grown');
+                this.sound.play('powerup');
                 this.lightning3.setVisible(false);
             }
             this.plottext.setVisible(false);
@@ -322,9 +325,11 @@ class Garden extends Phaser.Scene{
             if (seed = this.lightning1 && !planted) {
                 this.lightning0_2.setVisible(true);
                 planted = true;
-            } else if (this.lightning3_2.setVisible(true)){
+                this.sound.play('plant');
+            } else if (this.lightning3_2.visible){
                 // increase player speed
                 console.log('grown2');
+                this.sound.play('powerup');
                 this.lightning3_2.setVisible(false);
             }
             this.plottext.setVisible(false);
@@ -338,9 +343,12 @@ class Garden extends Phaser.Scene{
             if (seed = this.lightning1 && !planted) {
                 this.lightning0_3.setVisible(true);
                 planted = true;
-            } else if (this.lightning3_3.setVisible(true)){
+                this.sound.play('plant');
+            } else if (this.lightning3_3.visible){
                 // increase player speed
                 console.log('grown3');
+                console.log( round_planted +3 >= round);
+                this.sound.play('powerup');
                 this.lightning3_3.setVisible(false);
             }
             this.plottext.setVisible(false);

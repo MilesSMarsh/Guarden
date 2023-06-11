@@ -154,6 +154,7 @@ class Play extends Phaser.Scene{
 
         if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
             this.p1Character.changeWeapon(this.shovel);
+            this.sound.play('click');
         }
 
         if (this.p1Character.currHealth == 4){
@@ -289,6 +290,7 @@ class Play extends Phaser.Scene{
     takeDamage(enemy, player){
         enemy.die();
         this.p1Character.damage();
+        this.sound.play('hit');
         if (this.p1Character.currHealth == 0){
             if (hardMode === true){
                 round -= 1;

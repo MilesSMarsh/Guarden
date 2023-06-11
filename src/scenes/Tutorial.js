@@ -51,7 +51,8 @@ class Tutorial extends Phaser.Scene {
         this.add.text(50, 260, 'License code: VIY3ECE2JGWL7DCL', creditConfig);
         this.add.text(50, 280, 'Fighting Music from #Uppbeat (free for Creators!): https://uppbeat.io/t/moire/bees-in-the-garden', creditConfig);
         this.add.text(50, 290, 'License code: CNJBGQ0Y7QR1DZ9S', creditConfig);
-        
+        this.add.text(50, 310, 'Interaction sound effects from sfxr.me', creditConfig);
+
         keyBACKSPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 
     }

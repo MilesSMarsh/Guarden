@@ -224,7 +224,10 @@ class Load extends Phaser.Scene {
 
         //this.load.image('enemy', './assets/tempEnemy.png');
 
-        
+        this.load.audio('powerup', './assets/powerUp.wav');
+        this.load.audio('plant', './assets/plant.wav');
+        this.load.audio('click', './assets/click.wav');
+        this.load.audio('hit', './assets/hit.wav');
     }
 
     create() {

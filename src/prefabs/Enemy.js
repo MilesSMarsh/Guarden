@@ -60,10 +60,12 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         if (round % 2 != 0){
             this.parentScene.snailsLeft -= 1;
             this.destroy();
+            this.parentScene.sound.play('hit');
         }
         else{
             this.parentScene.ratsLeft -= 1;
             this.destroy();
+            this.parentScene.sound.play('hit');
         }
     }
 }
