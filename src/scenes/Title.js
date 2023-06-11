@@ -19,6 +19,9 @@ class Title extends Phaser.Scene {
         this.add.image(0, 0, 'title').setOrigin(0, 0);
         //this.hardModeText.setVisible(false);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        console.log('title screen check');
+        numOfSnails = 0; 
+        numOfRats = 0;
     }
 
     update() {

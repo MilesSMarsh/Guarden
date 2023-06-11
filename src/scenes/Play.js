@@ -291,14 +291,14 @@ class Play extends Phaser.Scene{
         this.p1Character.damage();
         if (this.p1Character.currHealth == 0){
             if (hardMode === true){
-                this.scene.start('titleScene');
                 round -= 1;
                 this.gameplayMusic.stop();
+                this.scene.start('titleScene');
             }
             else{
-                this.scene.start('gardenScene');
                 round -= 1;
                 this.gameplayMusic.stop();
+                this.scene.start('gardenScene');
             }
         }
     }

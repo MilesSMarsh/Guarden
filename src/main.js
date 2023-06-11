@@ -7,7 +7,7 @@ let config = {
     physics:{
         default: "arcade",
         arcade : {
-            debug: true
+            //debug: true
         }
     },
 
@@ -36,6 +36,8 @@ let round = 0;
 let numOfSnails = 0;
 let numOfRats = 0;
 let pickedUp = false;
+
+let return_from_victory_screen = false;
 
 let characterState = {
     weapon: new Weapon('shovel', 2, 0, 0, 50, 25),
