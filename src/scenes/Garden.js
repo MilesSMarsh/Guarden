@@ -104,7 +104,8 @@ class Garden extends Phaser.Scene{
 
         this.physics.add.collider(this.p1Character, this.spades);
 
-        this.physics.add.collider(this.p1Character, this.sblightningf);
+        //this.physics.add.collider(this.p1Character, this.sblightningf);
+        this.physics.add.overlap(this.p1Character, this.sblightningf, this.hide_seed, null, this);
 
     }
     update(){
@@ -121,11 +122,11 @@ class Garden extends Phaser.Scene{
         console.log('y/n', this.checkLocation(this.p1Character, this.sblightningf));
         */
 
-        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && 
-        this.checkLocation(this.p1Character, this.sblightningf)){
-            console.log('in front seed');
-            this.sblightningf.setVisible(false);
-        }
+        // if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && 
+        // this.checkLocation(this.p1Character, this.sblightningf)){
+        //     console.log('in front seed');
+        //     this.sblightningf.setVisible(false);
+        // }
 
         //console.log('gard',this.pickedUp);
         //if (this.pickedUp) {
@@ -168,6 +169,13 @@ class Garden extends Phaser.Scene{
             return true;
         } else {
             return false;
+        }
+    }
+
+    hide_seed(){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE)){
+            console.log('in front seed');
+            this.sblightningf.setVisible(false);
         }
     }
 

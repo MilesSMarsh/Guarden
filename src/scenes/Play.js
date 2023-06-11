@@ -130,6 +130,8 @@ class Play extends Phaser.Scene{
     update(){
 
         //console.log(hardMode)
+        //console.log(this.p1Character.x);
+        //console.log(this.p1Character.y);
 
         this.characterFSM.step();
         this.p1Character.moveHitBox();
@@ -147,6 +149,8 @@ class Play extends Phaser.Scene{
                 this.interactText.setVisible(true);
             }
         }
+
+        //this.physics.moveToObject(this.enemy, this.garden, 5);
 
         if(Phaser.Input.Keyboard.JustDown(this.keys.shift)){
             this.p1Character.changeWeapon(this.shovel);
@@ -298,6 +302,4 @@ class Play extends Phaser.Scene{
             }
         }
     }
-
-
 }
