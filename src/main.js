@@ -7,7 +7,7 @@ let config = {
     physics:{
         default: "arcade",
         arcade : {
-            //debug: true
+            debug: true
         }
     },
 
@@ -36,6 +36,12 @@ let round = 0;
 let numOfSnails = 0;
 let numOfRats = 0;
 let pickedUp = false;
+let planted = false;
+let plot = -1;
+let round_planted = -1;
+let round_planted_heart = -1;
+let seed = -1;
+let planted_heart = false;
 
 let return_from_victory_screen = false;
 

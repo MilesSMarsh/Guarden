@@ -4,24 +4,47 @@ class Garden extends Phaser.Scene{
     }
     create(){
 
-        this.pickedUp = false;
+        //this.pickedUp = false;
+        
         this.cameras.main.setBackgroundColor('0xFFFF00');
 
         this.add.image(0, 0, 'gardenScene').setOrigin(0, 0);
 
-        //this.lightning1 = this.add.image(50, 70, 'lightning1').setOrigin(0, 0);
+        // Plot areas
         this.plot1 = this.physics.add.staticSprite(95, 95, 'plot').setOrigin(0, 0);
-        this.lightning1 = this.add.image(55, 75, 'lightning1').setOrigin(0, 0);
         this.plot1.setVisible(false);
+        this.plot2 = this.physics.add.staticSprite(185, 95, 'plot').setOrigin(0, 0);
+        this.plot2.setVisible(false);
+
+        // Lightning plant stages in plot 1
+        this.lightning0 = this.add.image(50, 70, 'lightning0').setOrigin(0, 0);
+        this.lightning0.setVisible(false);
+        this.lightning0.setScale(0.85);
+        this.lightning1 = this.add.image(55, 75, 'lightning1').setOrigin(0, 0);
         this.lightning1.setVisible(false);
         this.lightning1.setScale(0.85);
-        /*this.carrot2 = this.add.image(45, 120, 'carrot2').setOrigin(0, 0);
-        this.carrot2.setVisible(false);
-        this.carrot3 = this.add.image(45, 120, 'carrot3').setOrigin(0, 0);
-        this.carrot3.setVisible(false);
-        this.carrot4 = this.add.image(50, 120, 'carrot4').setOrigin(0, 0);
-        this.carrot4.setScale(0.8);
-        this.carrot4.setVisible(false);*/
+        this.lightning2 = this.add.image(57, 68, 'lightning2').setOrigin(0, 0);
+        this.lightning2.setVisible(false);
+        this.lightning2.setScale(0.85);
+        this.lightning3 = this.add.image(58, 55, 'lightning3').setOrigin(0, 0);
+        //this.lightning3.name = 'lightning3';
+        this.lightning3.setScale(0.75);
+        this.lightning3.setVisible(false);
+
+        
+        // Lightning plant stages in plot 2
+        this.lightning0_2 = this.add.image(140, 68, 'lightning0').setOrigin(0, 0);
+        this.lightning0_2.setVisible(false);
+        this.lightning0_2.setScale(0.85);
+        this.lightning1_2 = this.add.image(147, 70, 'lightning1').setOrigin(0, 0);
+        this.lightning1_2.setVisible(false);
+        this.lightning1_2.setScale(0.85);
+        this.lightning2_2 = this.add.image(147, 68, 'lightning2').setOrigin(0, 0);
+        this.lightning2_2.setVisible(false);
+        this.lightning2_2.setScale(0.85);
+        this.lightning3_2 = this.add.image(147, 58, 'lightning3').setOrigin(0, 0);
+        this.lightning3_2.setScale(0.75);
+        this.lightning3_2.setVisible(false);
         
         
         this.carrot1 = this.add.image(45, 120, 'carrot1').setOrigin(0, 0);
@@ -34,7 +57,7 @@ class Garden extends Phaser.Scene{
         this.carrot4.setScale(0.8);
         this.carrot4.setVisible(false);
 
-        this.pepper1 = this.add.image(135, 68, 'pepper1').setOrigin(0, 0);
+        /*this.pepper1 = this.add.image(135, 68, 'pepper1').setOrigin(0, 0);
         this.pepper1.setScale(0.9);
         this.pepper1.setVisible(true);
         this.pepper2 = this.add.image(135, 68, 'pepper2').setOrigin(0, 0);
@@ -55,7 +78,7 @@ class Garden extends Phaser.Scene{
         this.radish3.setVisible(false);
         this.radish4 = this.add.image(220, 130, 'radish4').setOrigin(0, 0);
         this.radish4.setScale(0.8);
-        this.radish4.setVisible(false);
+        this.radish4.setVisible(false);*/
         
         let menuConfig = {
             fontFamily: 'Courier',
@@ -76,7 +99,7 @@ class Garden extends Phaser.Scene{
 
 
         this.add.text(350, 25, `Next Round: ${round + 1}`, menuConfig);
-        this.add.text(25, 230, ' Interact with GATE', menuConfig);
+        this.add.text(25, 240, ' Interact with GATE', menuConfig);
         this.gate = this.physics.add.staticSprite(20, 320, 'fence').setOrigin(0.5, 0.5);
         this.gate.name = 'gate';
 
@@ -92,9 +115,12 @@ class Garden extends Phaser.Scene{
         this.rake.name = 'rake';
 
         this.sblightningf = this.physics.add.staticSprite(600, 200, 'sb_lightningf').setOrigin(0.5, 0.5);
-        //this.sblightningf.setScale(20, 20);
         this.sblightningf.name = 'sblightning';
         this.sblightningf.setVisible(true);
+
+        this.sbheartf = this.physics.add.staticSprite(600, 200, 'sb_heartf').setOrigin(0.5, 0.5);
+        this.sbheartf.name = 'sbheart';
+        this.sbheartf.setVisible(false);
 
         this.keys = this.input.keyboard.createCursorKeys();
         this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -126,6 +152,7 @@ class Garden extends Phaser.Scene{
         this.physics.add.overlap(this.p1Character, this.sblightningf, this.hide_seed, null, this);
 
         this.physics.add.overlap(this.p1Character, this.plot1, this.plant_seed, null, this);
+        this.physics.add.overlap(this.p1Character, this.plot2, this.plant_seed2, null, this);
 
     }
     update(){
@@ -148,34 +175,66 @@ class Garden extends Phaser.Scene{
         //     this.sblightningf.setVisible(false);
         // }
 
-        //console.log('gard',this.pickedUp);
-        //if (this.pickedUp) {
-        //    this.sblightningf.setPosition(45, 180);
-        //    this.sblightningf.setVisible(false);
-        //}
+        //console.log(round);
 
         if (round == 1) {
-            //this.lightning1.setVisible(true);
-            this.carrot2.setVisible(true);
-            this.pepper2.setVisible(true);
-            this.radish2.setVisible(true);
-            this.carrot1.setVisible(false);
-            this.pepper1.setVisible(false);
-            this.radish1.setVisible(false);
+            setTimeout(() => {
+                this.carrot2.setVisible(true);
+                this.carrot1.setVisible(false);
+                if (round_planted == 0) {
+                    console.log('round 1 reached');
+                    this.sblightningf.setVisible(false);
+                    if (plot == 1) {
+                        console.log('plot 1');
+                        this.lightning1.setVisible(true);
+                        this.lightning0.setVisible(false);
+                    }
+                } 
+                //this.pepper2.setVisible(true);
+                //this.radish2.setVisible(true);
+                /*this.pepper1.setVisible(false);
+                this.radish1.setVisible(false);*/
+            }, 40);
         } else if (round == 2) {
-            this.carrot2.setVisible(false);
-            this.pepper2.setVisible(false);
-            this.radish2.setVisible(false);
-            this.carrot3.setVisible(true);
-            this.pepper3.setVisible(true);
-            this.radish3.setVisible(true);
+            setTimeout(() => {
+                this.carrot2.setVisible(false);
+                this.carrot1.setVisible(false);
+                this.carrot3.setVisible(true);
+                if (round_planted == 0) {
+                    this.sblightningf.setVisible(false);
+                    if (plot == 1) {
+                        this.lightning2.setVisible(true);
+                        this.lightning1.setVisible(false);
+                    }
+                } 
+                //this.pepper2.setVisible(false);
+                //this.radish2.setVisible(false);
+                //this.pepper3.setVisible(true);
+                //this.radish3.setVisible(true);
+            }, 40); 
         } else if (round == 3) {
-            this.carrot3.setVisible(false);
-            this.pepper3.setVisible(false);
-            this.radish3.setVisible(false);
-            this.carrot4.setVisible(true);
-            this.pepper4.setVisible(true);
-            this.radish4.setVisible(true);
+            setTimeout(() => {
+                this.carrot3.setVisible(false);
+                this.carrot1.setVisible(false);
+                this.carrot4.setVisible(true);
+                if (round_planted == 0) {
+                    this.sblightningf.setVisible(false);
+                    if (plot == 1) {
+                        this.lightning3.setVisible(true);
+                        this.lightning2.setVisible(false);
+                        this.lightning1.setVisible(false);
+                    }
+                }
+                //this.pepper3.setVisible(false);
+                //this.radish3.setVisible(false);
+                //this.pepper4.setVisible(true);
+                //this.radish4.setVisible(true);
+            }, 40);
+        }
+        if (planted && round == round_planted + 2) {
+            this.sbheartf.setVisible(true);
+            round_planted_heart = round;
+            planted_heart = true;
         }
       
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
@@ -196,16 +255,40 @@ class Garden extends Phaser.Scene{
     hide_seed(){
         if (Phaser.Input.Keyboard.JustDown(this.keys.keyE)){
             console.log('in front seed');
-            this.sblightningf.setVisible(false);
-            this.pickedUp = true;
+            if (!pickedUp) {
+                this.sblightningf.setVisible(false);
+                seed = this.lightning1;
+                this.plottext = this.add.text(45, 25, 'Go to a top row plot to plant it');
+                pickedUp = true;
+            }
         }
     }
     plant_seed(){
-        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && this.pickedUp){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && pickedUp){
             console.log('plant seed');
-            //this.lightning1.setPosition(55, 65);
-            //this.lightning1.setScale(0.85);
-            this.lightning1.setVisible(true);
+            plot = 1;
+            round_planted = round;
+            if (seed = this.lightning1 && !planted) {
+                this.lightning0.setVisible(true);
+                planted = true;
+            } else if (this.lightning3.setVisible(true)){
+                // increase player speed
+                console.log('grown');
+                this.lightning3.setVisible(false);
+            }
+            this.plottext.setVisible(false);
+        }
+    }
+    plant_seed2(){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && pickedUp){
+            console.log('plant seed');
+            plot = 2;
+            round_planted = round;
+            if (seed = this.lightning1 && !planted) {
+                this.lightning0_2.setVisible(true);
+                planted = true;
+            }
+            this.plottext.setVisible(false);
         }
     }
 

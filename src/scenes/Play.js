@@ -197,7 +197,7 @@ class Play extends Phaser.Scene{
             this.heart1.setVisible(false);
             //maybe play a cute little animation
             //this.scene.start('gameOverScene');
-        }
+        }this
 
 
     }

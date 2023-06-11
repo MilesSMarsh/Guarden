@@ -217,7 +217,10 @@ class Load extends Phaser.Scene {
         this.load.image('sb_heartf', './assets/Plants/Seed_Bags/Seed Bag Heart Fruit.png');
 
         this.load.image('plot', './assets/Plants/Lightning_Fruit/LightningSpot.png');
+        this.load.image('lightning0', './assets/Plants/Lightning_Fruit/Plant1.png');
         this.load.image('lightning1', './assets/Plants/Lightning_Fruit/Lightning_Fruit2.png');
+        this.load.image('lightning2', './assets/Plants/Lightning_Fruit/Lightning_Fruit3.png');
+        this.load.image('lightning3', './assets/Plants/Lightning_Fruit/Lightning_Fruit4.png');
 
         //this.load.image('enemy', './assets/tempEnemy.png');
 
