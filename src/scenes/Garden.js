@@ -19,6 +19,15 @@ class Garden extends Phaser.Scene{
         this.plot3 = this.physics.add.staticSprite(271, 103, 'plot').setOrigin(0, 0);
         this.plot3.setVisible(false);
         this.plot3.name = 'plot3';
+        this.plot7 = this.physics.add.staticSprite(90, 225, 'plot').setOrigin(0, 0);
+        this.plot7.setVisible(false);
+        this.plot7.name = 'plot7';
+        this.plot8 = this.physics.add.staticSprite(175, 228, 'plot').setOrigin(0, 0);
+        this.plot8.setVisible(false);
+        this.plot8.name = 'plot8';
+        this.plot9 = this.physics.add.staticSprite(266, 232, 'plot').setOrigin(0, 0);
+        this.plot9.setVisible(false);
+        this.plot9.name = 'plot9';
 
         // Lightning plant stages in plot 1
         this.lightning0 = this.add.image(50, 70, 'lightning0').setOrigin(0, 0);
@@ -73,6 +82,28 @@ class Garden extends Phaser.Scene{
         this.carrot4 = this.add.image(50, 120, 'carrot4').setOrigin(0, 0);
         this.carrot4.setScale(0.8);
         this.carrot4.setVisible(false);
+
+        // Heart plant stages in plot 7
+        this.heart0 = this.add.image(45, 200, 'heart0').setOrigin(0, 0);
+        this.heart0.setVisible(false);
+        this.heart0.setScale(0.85);
+        this.heart1 = this.add.image(45, 200, 'heart1').setOrigin(0, 0);
+        this.heart1.setVisible(false);
+        this.heart1.setScale(0.85);
+        this.heart2 = this.add.image(45, 200, 'heart2').setOrigin(0, 0);
+        this.heart2.setVisible(false);
+        this.heart2.setScale(0.85);
+        this.heart3 = this.add.image(47, 184, 'heart3').setOrigin(0, 0);
+        this.heart3.setVisible(false);
+        this.heart3.setScale(0.8);
+        
+        // Heart plant stages in plot 8
+        this.heart0_2 = this.add.image(65, 200, 'heart0').setOrigin(0, 0);
+        this.heart0_2.setVisible(false);
+        this.heart0_2.setScale(0.85);
+        this.heart1_2 = this.add.image(45, 200, 'heart1').setOrigin(0, 0);
+        this.heart1_2.setVisible(false);
+        this.heart1_2.setScale(0.85);
 
         /*this.pepper1 = this.add.image(135, 68, 'pepper1').setOrigin(0, 0);
         this.pepper1.setScale(0.9);
