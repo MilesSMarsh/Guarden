@@ -177,6 +177,10 @@ class Load extends Phaser.Scene {
             frameWidth: 100,
             frameHeight: 100
         });        
+        this.load.spritesheet('lightning-sheet', './assets/Plants/Lightning_Fruit/Sprite Sheet Lightning Fruit.png',{
+            frameWidth: 100,
+            frameHeight: 100
+        }); 
 
 
         this.load.audio('background_music', './assets/backgroundMusic.mp3');
@@ -211,6 +215,9 @@ class Load extends Phaser.Scene {
 
         this.load.image('sb_lightningf', './assets/Plants/Seed_Bags/Seed Bag Lightning Fruit.png');
         this.load.image('sb_heartf', './assets/Plants/Seed_Bags/Seed Bag Heart Fruit.png');
+
+        this.load.image('plot', './assets/Plants/Lightning_Fruit/LightningSpot.png');
+        this.load.image('lightning1', './assets/Plants/Lightning_Fruit/Lightning_Fruit2.png');
 
         //this.load.image('enemy', './assets/tempEnemy.png');
 

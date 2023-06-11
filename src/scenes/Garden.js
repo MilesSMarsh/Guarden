@@ -4,10 +4,26 @@ class Garden extends Phaser.Scene{
     }
     create(){
 
-        this.pickedUp = false
+        this.pickedUp = false;
         this.cameras.main.setBackgroundColor('0xFFFF00');
-        
+
         this.add.image(0, 0, 'gardenScene').setOrigin(0, 0);
+
+        //this.lightning1 = this.add.image(50, 70, 'lightning1').setOrigin(0, 0);
+        this.plot1 = this.physics.add.staticSprite(95, 95, 'plot').setOrigin(0, 0);
+        this.lightning1 = this.add.image(55, 75, 'lightning1').setOrigin(0, 0);
+        this.plot1.setVisible(false);
+        this.lightning1.setVisible(false);
+        this.lightning1.setScale(0.85);
+        /*this.carrot2 = this.add.image(45, 120, 'carrot2').setOrigin(0, 0);
+        this.carrot2.setVisible(false);
+        this.carrot3 = this.add.image(45, 120, 'carrot3').setOrigin(0, 0);
+        this.carrot3.setVisible(false);
+        this.carrot4 = this.add.image(50, 120, 'carrot4').setOrigin(0, 0);
+        this.carrot4.setScale(0.8);
+        this.carrot4.setVisible(false);*/
+        
+        
         this.carrot1 = this.add.image(45, 120, 'carrot1').setOrigin(0, 0);
         this.carrot1.setVisible(true);
         this.carrot2 = this.add.image(45, 120, 'carrot2').setOrigin(0, 0);
@@ -107,6 +123,8 @@ class Garden extends Phaser.Scene{
         //this.physics.add.collider(this.p1Character, this.sblightningf);
         this.physics.add.overlap(this.p1Character, this.sblightningf, this.hide_seed, null, this);
 
+        this.physics.add.overlap(this.p1Character, this.plot1, this.plant_seed, null, this);
+
     }
     update(){
 
@@ -135,6 +153,7 @@ class Garden extends Phaser.Scene{
         //}
 
         if (round == 1) {
+            //this.lightning1.setVisible(true);
             this.carrot2.setVisible(true);
             this.pepper2.setVisible(true);
             this.radish2.setVisible(true);
@@ -176,6 +195,15 @@ class Garden extends Phaser.Scene{
         if (Phaser.Input.Keyboard.JustDown(this.keys.keyE)){
             console.log('in front seed');
             this.sblightningf.setVisible(false);
+            this.pickedUp = true;
+        }
+    }
+    plant_seed(){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && this.pickedUp){
+            console.log('plant seed');
+            //this.lightning1.setPosition(55, 65);
+            //this.lightning1.setScale(0.85);
+            this.lightning1.setVisible(true);
         }
     }
 
