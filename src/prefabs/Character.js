@@ -145,6 +145,14 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 //this.pickedUp = true;
                 //console.log('char', this.pickedUp);
             }
+            /*if(objectsHit[i].gameObject.name == 'plot1'){
+                console.log('harvest 1');
+                this.charVelocity += 25;
+            }
+            if(objectsHit[i].gameObject.name == 'plot3'){
+                console.log('harvest 3');
+                this.charVelocity += 25;
+            }*/
         }
     }
     

@@ -13,8 +13,12 @@ class Garden extends Phaser.Scene{
         // Plot areas
         this.plot1 = this.physics.add.staticSprite(95, 95, 'plot').setOrigin(0, 0);
         this.plot1.setVisible(false);
+        this.plot1.name = 'plot1';
         this.plot2 = this.physics.add.staticSprite(185, 95, 'plot').setOrigin(0, 0);
         this.plot2.setVisible(false);
+        this.plot3 = this.physics.add.staticSprite(271, 103, 'plot').setOrigin(0, 0);
+        this.plot3.setVisible(false);
+        this.plot3.name = 'plot3';
 
         // Lightning plant stages in plot 1
         this.lightning0 = this.add.image(50, 70, 'lightning0').setOrigin(0, 0);
@@ -46,6 +50,19 @@ class Garden extends Phaser.Scene{
         this.lightning3_2.setScale(0.75);
         this.lightning3_2.setVisible(false);
         
+        // Lightning plant stages in plot 3
+        this.lightning0_3 = this.add.image(226, 75, 'lightning0').setOrigin(0, 0);
+        this.lightning0_3.setVisible(false);
+        this.lightning0_3.setScale(0.85);
+        this.lightning1_3 = this.add.image(235, 84, 'lightning1').setOrigin(0, 0);
+        this.lightning1_3.setVisible(false);
+        this.lightning1_3.setScale(0.85);
+        this.lightning2_3 = this.add.image(233, 75, 'lightning2').setOrigin(0, 0);
+        this.lightning2_3.setVisible(false);
+        this.lightning2_3.setScale(0.85);
+        this.lightning3_3 = this.add.image(235, 64, 'lightning3').setOrigin(0, 0);
+        this.lightning3_3.setScale(0.75);
+        this.lightning3_3.setVisible(false);
         
         this.carrot1 = this.add.image(45, 120, 'carrot1').setOrigin(0, 0);
         this.carrot1.setVisible(true);
@@ -153,7 +170,7 @@ class Garden extends Phaser.Scene{
 
         this.physics.add.overlap(this.p1Character, this.plot1, this.plant_seed, null, this);
         this.physics.add.overlap(this.p1Character, this.plot2, this.plant_seed2, null, this);
-
+        this.physics.add.overlap(this.p1Character, this.plot3, this.plant_seed3, null, this);
     }
     update(){
 
@@ -182,12 +199,16 @@ class Garden extends Phaser.Scene{
                 this.carrot2.setVisible(true);
                 this.carrot1.setVisible(false);
                 if (round_planted == 0) {
-                    console.log('round 1 reached');
                     this.sblightningf.setVisible(false);
                     if (plot == 1) {
-                        console.log('plot 1');
                         this.lightning1.setVisible(true);
                         this.lightning0.setVisible(false);
+                    } else if (plot == 2) {
+                        this.lightning1_2.setVisible(true);
+                        this.lightning0_2.setVisible(false);
+                    } else if (plot == 3) {
+                        this.lightning1_3.setVisible(true);
+                        this.lightning0_3.setVisible(false);
                     }
                 } 
                 //this.pepper2.setVisible(true);
@@ -205,6 +226,12 @@ class Garden extends Phaser.Scene{
                     if (plot == 1) {
                         this.lightning2.setVisible(true);
                         this.lightning1.setVisible(false);
+                    } else if (plot == 2) {
+                        this.lightning2_2.setVisible(true);
+                        this.lightning1_2.setVisible(false);
+                    } else if (plot == 3) {
+                        this.lightning2_3.setVisible(true);
+                        this.lightning1_3.setVisible(false);
                     }
                 } 
                 //this.pepper2.setVisible(false);
@@ -223,6 +250,14 @@ class Garden extends Phaser.Scene{
                         this.lightning3.setVisible(true);
                         this.lightning2.setVisible(false);
                         this.lightning1.setVisible(false);
+                    } else if (plot == 2) {
+                        this.lightning3_2.setVisible(true);
+                        this.lightning2_2.setVisible(false);
+                        this.lightning1_2.setVisible(false);
+                    } else if (plot == 3) {
+                        this.lightning3_3.setVisible(true);
+                        this.lightning2_3.setVisible(false);
+                        this.lightning1_3.setVisible(false);
                     }
                 }
                 //this.pepper3.setVisible(false);
@@ -287,6 +322,26 @@ class Garden extends Phaser.Scene{
             if (seed = this.lightning1 && !planted) {
                 this.lightning0_2.setVisible(true);
                 planted = true;
+            } else if (this.lightning3_2.setVisible(true)){
+                // increase player speed
+                console.log('grown2');
+                this.lightning3_2.setVisible(false);
+            }
+            this.plottext.setVisible(false);
+        }
+    }
+    plant_seed3(){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && pickedUp){
+            console.log('plant seed');
+            plot = 3;
+            round_planted = round;
+            if (seed = this.lightning1 && !planted) {
+                this.lightning0_3.setVisible(true);
+                planted = true;
+            } else if (this.lightning3_3.setVisible(true)){
+                // increase player speed
+                console.log('grown3');
+                this.lightning3_3.setVisible(false);
             }
             this.plottext.setVisible(false);
         }
