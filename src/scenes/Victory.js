@@ -15,10 +15,11 @@ class Victory extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        this.cameras.main.setBackgroundColor("#d5d5d5");
-        this.add.text(100, 100, 'Victory\nPress Enter to go to Title\nPress E to continue playing', menuConfig);
+        this.add.image(0, 0, 'victoryScreen').setOrigin(0, 0);
+        //this.cameras.main.setBackgroundColor("#d5d5d5");
+        //this.add.text(100, 100, 'Victory\nPress Enter to go to Title\nPress E to continue playing', menuConfig);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         //this.gameplayMusic.stop()
 
 
@@ -30,7 +31,7 @@ class Victory extends Phaser.Scene {
           round = 0;
           this.scene.start('titleScene');    
         }
-        if (Phaser.Input.Keyboard.JustDown(keyE)) {
+        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.scene.start('gardenScene');    
           }
       }

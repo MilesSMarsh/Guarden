@@ -45,7 +45,7 @@ class Tutorial extends Phaser.Scene {
         this.add.text(50, 160, 'between scenes.', wordConfig);
         this.add.text(50, 180, 'Controls:', menuConfig);
         this.add.text(50, 210, 'Move using WASD or Arrows, and press Space to Attack', wordConfig);
-        this.add.text(50, 230, 'Press E to interact with objects', wordConfig);
+        this.add.text(50, 230, 'Press E to interact with objects, like the weapons or seeds', wordConfig);
         this.add.text(400, 325, 'Press BACKSPACE to return', wordConfig);
         this.add.text(50, 250, 'Garden Music from #Uppbeat (free for Creators!): https://uppbeat.io/t/christian-larssen/light-and-easy', creditConfig);
         this.add.text(50, 260, 'License code: VIY3ECE2JGWL7DCL', creditConfig);
