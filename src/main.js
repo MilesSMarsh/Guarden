@@ -42,6 +42,7 @@ let round_planted = -1;
 let round_planted_heart = -1;
 let seed = -1;
 let planted_heart = false;
+let harvested_lightningp = false;
 
 let return_from_victory_screen = false;
 
