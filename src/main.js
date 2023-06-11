@@ -12,7 +12,7 @@ let config = {
     },
 
 
-    scene: [Load, Title, Menu, Tutorial, Garden, Play, Victory]
+    scene: [Load, Title, Menu, Tutorial, Credits, Garden, Play, Victory]
 
 }
 
