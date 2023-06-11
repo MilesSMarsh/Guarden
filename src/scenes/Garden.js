@@ -4,6 +4,7 @@ class Garden extends Phaser.Scene{
     }
     create(){
 
+        this.pickedUp = false
         this.cameras.main.setBackgroundColor('0xFFFF00');
         
         this.add.image(0, 0, 'gardenScene').setOrigin(0, 0);
@@ -72,6 +73,11 @@ class Garden extends Phaser.Scene{
         this.rake.setSize(50, 50);
         this.rake.name = 'rake';
 
+        this.sblightningf = this.physics.add.staticSprite(600, 200, 'sb_lightningf').setOrigin(0.5, 0.5);
+        //this.sblightningf.setScale(20, 20);
+        this.sblightningf.name = 'sblightning';
+        this.sblightningf.setVisible(true);
+
         this.keys = this.input.keyboard.createCursorKeys();
         this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keys.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -98,6 +104,8 @@ class Garden extends Phaser.Scene{
 
         this.physics.add.collider(this.p1Character, this.spades);
 
+        this.physics.add.collider(this.p1Character, this.sblightningf);
+
     }
     update(){
 
@@ -105,6 +113,25 @@ class Garden extends Phaser.Scene{
 
         this.characterFSM.step();
         this.p1Character.moveHitBox();
+
+        /*console.log('x',this.sblightningf.x);
+        console.log('y',this.sblightningf.y);
+        console.log('char x',this.p1Character.x);
+        console.log('char y',this.p1Character.y);
+        console.log('y/n', this.checkLocation(this.p1Character, this.sblightningf));
+        */
+
+        if (Phaser.Input.Keyboard.JustDown(this.keys.keyE) && 
+        this.checkLocation(this.p1Character, this.sblightningf)){
+            console.log('in front seed');
+            this.sblightningf.setVisible(false);
+        }
+
+        //console.log('gard',this.pickedUp);
+        //if (this.pickedUp) {
+        //    this.sblightningf.setPosition(45, 180);
+        //    this.sblightningf.setVisible(false);
+        //}
 
         if (round == 1) {
             this.carrot2.setVisible(true);
@@ -132,6 +159,15 @@ class Garden extends Phaser.Scene{
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
           this.scene.start('playScene');    
           this.gameplayMusic.stop();
+        }
+    }
+    checkLocation(player, plant) {
+        if(player.x >= plant.x - 26 &&
+            player.x <= plant.x + 31 &&
+            player.y <= plant.y + 46) {
+            return true;
+        } else {
+            return false;
         }
     }
 

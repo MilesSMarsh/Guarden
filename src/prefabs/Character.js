@@ -131,6 +131,12 @@ class Character extends Phaser.Physics.Arcade.Sprite{
                 console.log('equip rake');
                 this.changeWeapon(new Weapon('rake', 2, 0, 0, 50, 25));
             }
+
+            if(objectsHit[i].gameObject.name == 'sblightning'){
+                console.log('equip seed');
+                //this.pickedUp = true;
+                //console.log('char', this.pickedUp);
+            }
         }
     }
     

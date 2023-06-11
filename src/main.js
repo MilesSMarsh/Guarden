@@ -35,6 +35,7 @@ let hardMode = false;
 let round = 0;
 let numOfSnails = 0;
 let numOfRats = 0;
+let pickedUp = false;
 
 let characterState = {
     weapon: new Weapon('shovel', 2, 0, 0, 50, 25),

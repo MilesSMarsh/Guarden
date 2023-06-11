@@ -209,6 +209,8 @@ class Load extends Phaser.Scene {
         this.load.image('radish3', './assets/Plants/Radish/Radish3.png');
         this.load.image('radish4', './assets/Plants/Radish/Radish.png');
 
+        this.load.image('sb_lightningf', './assets/Plants/Seed_Bags/Seed Bag Lightning Fruit.png');
+        this.load.image('sb_heartf', './assets/Plants/Seed_Bags/Seed Bag Heart Fruit.png');
 
         //this.load.image('enemy', './assets/tempEnemy.png');
 
